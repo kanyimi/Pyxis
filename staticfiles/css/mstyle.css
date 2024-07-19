@@ -1,0 +1,347 @@
+/* Ваш существующий стиль */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.header {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.header-title {
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 10px;
+}
+
+.navigation {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+    transition-delay: 0.8s;
+    z-index: 101;
+    margin-top: 10px;
+}
+
+.navigation.active {
+    width: 200px;
+    height: 200px;
+    transition-delay: 0s;
+}
+
+.navigation span {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(calc(12px * var(--x)), calc(12px * var(--y)));
+    transition: transform 0.5s, width 0.5s, height 0.5s, background 0.5s;
+    transition-delay: calc(0.1s * var(--i));
+}
+
+.navigation.active span {
+    width: 45px;
+    height: 45px;
+    background: #000000;
+    transform: translate(calc(60px * var(--x)), calc(60px * var(--y)));
+}
+
+.navigation span ion-icon {
+    transition: 0.5s;
+    font-size: 0em;
+}
+
+.navigation.active span ion-icon {
+    font-size: 1.35em;
+    color: #fff;
+}
+
+.navigation.active span:hover ion-icon {
+    color: rgba(255, 255, 255, 0.84);
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.84)) drop-shadow(0 0 5px rgba(255, 255, 255, 0.84)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.84));
+}
+
+.centered-menu span {
+    margin: 0 10px;
+}
+
+.login-button {
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #555555;
+}
+
+.main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 230px;
+    padding-bottom: 70px;
+    overflow: hidden;
+    width: 100%;
+    margin: 10px 0;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10; /* ensure main content is above the animated lines */
+}
+
+.chat-container {
+    flex-grow: 1;
+    width: 90%;
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #1f1f1f;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.messages-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.input-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    outline: none;
+    position: relative;
+    z-index: 10; /* ensure input container is above the animated lines */
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    margin-right: 10px;
+    width: 100%;
+    background-color: #333333;
+    color: #ffffff;
+    box-sizing: border-box;
+    outline: none;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #555555;
+}
+
+.footer {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+    z-index: 100;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+.message-content {
+    margin-left: 30px;
+    box-sizing: border-box;
+}
+
+.message img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.user-message, .bot-message {
+    background-color: #333333;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.user-message {
+    align-self: flex-end;
+}
+
+.bot-message {
+    align-self: flex-start;
+}
+
+@keyframes typing {
+    0%, 20% { content: "Печатаю ответ"; }
+    30%, 50% { content: "Печатаю ответ."; }
+    60%, 80% { content: "Печатаю ответ.."; }
+    90%, 100% { content: "Печатаю ответ..."; }
+}
+
+.typing-indicator::after {
+    content: "Печатаю ответ";
+    animation: typing 2s steps(1, end) infinite;
+}
+
+@media (max-width: 600px) {
+    .header, .footer {
+        padding: 10px;
+    }
+
+    .header-title {
+        font-size: 18px;
+    }
+
+    .navigation {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .main {
+        padding-top: 230px;
+    }
+
+    .chat-container, .input-container {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    #message-input, button {
+        font-size: 14px;
+    }
+}
+
+/* Новый стиль для анимации линий */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1; /* Порядок отображения */
+    overflow: hidden; /* Скрытие переполнения */
+    width: 100%; /* Ширина */
+    display: grid; /* Используем CSS Grid */
+    grid-template-columns: repeat(8, 1fr); /* 8 равных колонок */
+}
+
+/* Стили для линий */
+.line {
+    width: 1px; /* Ширина линий */
+    height: 100%; /* Высота */
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0%,
+        #ffffff 10%,
+        transparent 50%
+    ); /* Повторяющийся градиент с увеличенными промежутками */
+    animation: move 30s linear infinite; /* Замедленная анимация */
+}
+
+/* Анимация движения линий сверху вниз */
+@keyframes move {
+    0% {
+        transform: translateY(-100%); /* Начало за пределами верхней части */
+    }
+    100% {
+        transform: translateY(100%); /* Конец за пределами нижней части */
+    }
+}
+
+/* Анимация движения линий снизу вверх */
+@keyframes moveReverse {
+    0% {
+        transform: translateY(100%); /* Начало за пределами нижней части */
+    }
+    100% {
+        transform: translateY(-100%); /* Конец за пределами верхней части */
+    }
+}
+
+/* Задержка анимации и направление движения для четных и нечетных линий */
+.line:nth-child(odd) {
+    animation: move 30s linear infinite; /* Анимация для нечетных линий */
+    animation-delay: -15s; /* Задержка анимации */
+}
+.line:nth-child(even) {
+    animation: moveReverse 30s linear infinite; /* Анимация для четных линий */
+    animation-delay: -15s; /* Задержка анимации */
+}
+
