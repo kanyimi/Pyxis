@@ -1,10 +1,8 @@
-
-
 // Объявление переменных на верхнем уровне
 let modal, span, submitFeedbackButton, feedbackText, feedbackMessageText;
 
 document.addEventListener('DOMContentLoaded', function() {
-    displayWelcomeMessage();
+//    displayWelcomeMessage();
 
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
@@ -21,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-
     // Инициализация элементов, связанных с модальным окном
     modal = document.getElementById('feedback-modal');
     span = document.getElementsByClassName('close')[0];
@@ -43,25 +40,44 @@ document.addEventListener('DOMContentLoaded', function() {
     // Отправка обратной связи
     submitFeedbackButton.addEventListener('click', function() {
         const feedbackContent = feedbackText.value.trim();
-        if (feedbackContent) {
-            const botMessageContent = feedbackMessageText.textContent;
-            submitFeedback(botMessageContent, feedbackContent);
-        }
+        const botMessageContent = feedbackMessageText.textContent;
+        submitFeedback(botMessageContent, feedbackContent, 'negative');
     });
 });
 
 function typeMessage(element, text, callback) {
     let index = 0;
+    const boldRegex = /\*\*(.*?)\*\*/g;
+    const parts = text.split(boldRegex);
+    let currentPart = 0;
+    let currentPartLength = parts[currentPart].length;
+    let isBold = false;
 
     function type() {
-        if (index < text.length) {
-            if (text.charAt(index) === '\n') {
-                element.innerHTML += '<br>';
+        if (currentPart < parts.length) {
+            if (index < currentPartLength) {
+                if (parts[currentPart].charAt(index) === '\n') {
+                    element.innerHTML += '<br>';
+                } else {
+                    if (isBold) {
+                        element.innerHTML += `<strong>${parts[currentPart].charAt(index)}</strong>`;
+                    } else {
+                        element.innerHTML += parts[currentPart].charAt(index);
+                    }
+                }
+                index++;
+                setTimeout(type, 20);
             } else {
-                element.innerHTML += text.charAt(index);
+                currentPart++;
+                if (currentPart < parts.length) {
+                    isBold = !isBold;
+                    index = 0;
+                    currentPartLength = parts[currentPart].length;
+                    setTimeout(type, 20);
+                } else if (callback) {
+                    callback();
+                }
             }
-            index++;
-            setTimeout(type, 50);
         } else if (callback) {
             callback();
         }
@@ -69,6 +85,7 @@ function typeMessage(element, text, callback) {
 
     type();
 }
+
 
 async function sendMessage() {
     const messageInput = document.getElementById('message-input');
@@ -91,17 +108,12 @@ async function sendMessage() {
     userIcon.alt = 'User';
 
     const userMessageTitle = document.createElement('span');
-    userMessageTitle.textContent = 'Вы';
+    userMessageTitle.innerHTML = `Вы: ${messageText.replace(/\n/g, '<br>')}`;
 
     userMessageHeader.appendChild(userIcon);
     userMessageHeader.appendChild(userMessageTitle);
 
-    const userMessageContent = document.createElement('div');
-    userMessageContent.className = 'message-content';
-    userMessageContent.innerHTML = messageText.replace(/\n/g, '<br>');
-
     userMessage.appendChild(userMessageHeader);
-    userMessage.appendChild(userMessageContent);
     messageList.appendChild(userMessage);
 
     const typingIndicator = document.createElement('li');
@@ -139,27 +151,25 @@ async function sendMessage() {
             botIcon.alt = 'Pyxis';
 
             const botMessageTitle = document.createElement('span');
-            botMessageTitle.textContent = 'Pyxis';
+            botMessageTitle.innerHTML = `Pyxis: ${data.response.replace(/\n/g, '<br>')}`;
 
             botMessageHeader.appendChild(botIcon);
             botMessageHeader.appendChild(botMessageTitle);
 
-            const botMessageContent = document.createElement('div');
-            botMessageContent.className = 'message-content';
-
             botMessage.appendChild(botMessageHeader);
-            botMessage.appendChild(botMessageContent);
             messageList.appendChild(botMessage);
 
-            // Добавление кнопок "палец вверх" и "палец вниз"
+            // Add feedback buttons
             const feedbackButtons = document.createElement('div');
             feedbackButtons.className = 'feedback-buttons';
 
             const goodButton = document.createElement('i');
             goodButton.className = 'fa fa-thumbs-up';
+            goodButton.dataset.submitted = 'false';
 
             const badButton = document.createElement('i');
             badButton.className = 'fa fa-thumbs-down';
+            badButton.dataset.submitted = 'false';
 
             feedbackButtons.appendChild(goodButton);
             feedbackButtons.appendChild(badButton);
@@ -167,16 +177,20 @@ async function sendMessage() {
 
             messageList.scrollTop = messageList.scrollHeight;
 
-            typeMessage(botMessageContent, data.response);
-
-            // Обработчики событий для кнопок обратной связи
+            // Add event listeners for feedback buttons
             goodButton.addEventListener('click', function() {
+                if (goodButton.dataset.submitted === 'true') return;
                 goodButton.style.color = '#000000';
+                submitFeedback(botMessageTitle.textContent, '', 'positive');
+                goodButton.dataset.submitted = 'true';
             });
 
             badButton.addEventListener('click', function() {
-                feedbackMessageText.textContent = botMessageContent.textContent;
+                if (badButton.dataset.submitted === 'true') return;
+                badButton.style.color = '#000000';
+                feedbackMessageText.textContent = botMessageTitle.textContent;
                 modal.style.display = 'block';
+                badButton.dataset.submitted = 'true';
             });
         }
     } catch (error) {
@@ -186,40 +200,62 @@ async function sendMessage() {
     }
 }
 
-async function submitFeedback(botMessageContent, feedbackContent) {
+function submitFeedback(botMessage, feedback, type) {
+    fetch('/api/submit_feedback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': '50jsh291g-636f-4891-b1ed-706e9ad7970f_721bap7nan'
+        },
+        body: JSON.stringify({
+            bot_message: botMessage,
+            feedback: feedback,
+            feedback_type: type
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Feedback submitted successfully:', data);
+    })
+    .catch(error => {
+        console.error('Error submitting feedback:', error);
+    });
+}
+
+
+async function submitFeedback(botMessageContent, feedbackContent, feedbackType) {
     try {
-        const response = await fetch('/api/submit_feedback/', {  // Обратите внимание на URL
+        const response = await fetch('/api/submit_feedback/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 botMessage: botMessageContent,
-                feedback: feedbackContent
+                feedback: feedbackContent,
+                feedback_type: feedbackType  // Указываем тип отзыва
             })
         });
 
         if (response.ok) {
             alert('Обратная связь успешно отправлена');
+            feedbackText.value = '';  // Очистка текста в модальном окне после успешной отправки
+            modal.style.display = 'none';  // Закрытие модального окна, если оно было открыто
         } else {
             alert('Не удалось отправить обратную связь');
         }
     } catch (error) {
         console.error('Error:', error);
         alert('Произошла ошибка при отправке обратной связи. Пожалуйста, проверьте консоль для получения дополнительной информации.');
-    } finally {
-        modal.style.display = 'none';
     }
 }
-
-
 
 
 document.addEventListener("DOMContentLoaded", function() {
     const lines = document.querySelectorAll(".line");
 
     lines.forEach(line => {
-        const totalWords = 2; // Уменьшаем количество слов
+        const totalWords = 1; // Уменьшаем количество слов
         const wordElements = [];
 
         for (let i = 0; i < totalWords; i++) {

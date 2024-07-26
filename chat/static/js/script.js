@@ -2,7 +2,7 @@
 let modal, span, submitFeedbackButton, feedbackText, feedbackMessageText;
 
 document.addEventListener('DOMContentLoaded', function() {
-    displayWelcomeMessage();
+//    displayWelcomeMessage();
 
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-
     // Инициализация элементов, связанных с модальным окном
     modal = document.getElementById('feedback-modal');
     span = document.getElementsByClassName('close')[0];
@@ -45,35 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
         submitFeedback(botMessageContent, feedbackContent, 'negative');
     });
 });
-
-function displayWelcomeMessage() {
-    const messageList = document.getElementById('messages-list');
-    const botMessage = document.createElement('li');
-    botMessage.className = 'message bot-message';
-
-    const botMessageHeader = document.createElement('div');
-    botMessageHeader.className = 'message-header';
-
-    const botIcon = document.createElement('img');
-    botIcon.src = 'static/img/chaticon/pyxw.png';
-    botIcon.alt = 'Pyxis';
-
-    const botMessageTitle = document.createElement('span');
-    botMessageTitle.textContent = 'Pyxis';
-
-    botMessageHeader.appendChild(botIcon);
-    botMessageHeader.appendChild(botMessageTitle);
-
-    const botMessageContent = document.createElement('div');
-    botMessageContent.className = 'message-content';
-
-    botMessage.appendChild(botMessageHeader);
-    botMessage.appendChild(botMessageContent);
-    messageList.appendChild(botMessage);
-
-    const welcomeText = "Здравствуйте! Я Pyxis - искусственный интеллект, созданный командой KRAKEN для оперативной помощи нашим пользователям, покупателям и продавцам. Обращаю ваше внимание, что сейчас я нахожусь на стадии бета-тестирования, обучение - долгий процесс, но с вашей помощью он может пройти быстрее!";
-    typeMessage(botMessageContent, welcomeText);
-}
 
 function typeMessage(element, text, callback) {
     let index = 0;
@@ -116,6 +86,7 @@ function typeMessage(element, text, callback) {
     type();
 }
 
+
 async function sendMessage() {
     const messageInput = document.getElementById('message-input');
     const messageText = messageInput.value.trim();
@@ -137,17 +108,12 @@ async function sendMessage() {
     userIcon.alt = 'User';
 
     const userMessageTitle = document.createElement('span');
-    userMessageTitle.textContent = 'Вы';
+    userMessageTitle.innerHTML = `Вы: ${messageText.replace(/\n/g, '<br>')}`;
 
     userMessageHeader.appendChild(userIcon);
     userMessageHeader.appendChild(userMessageTitle);
 
-    const userMessageContent = document.createElement('div');
-    userMessageContent.className = 'message-content';
-    userMessageContent.innerHTML = messageText.replace(/\n/g, '<br>');
-
     userMessage.appendChild(userMessageHeader);
-    userMessage.appendChild(userMessageContent);
     messageList.appendChild(userMessage);
 
     const typingIndicator = document.createElement('li');
@@ -185,29 +151,25 @@ async function sendMessage() {
             botIcon.alt = 'Pyxis';
 
             const botMessageTitle = document.createElement('span');
-            botMessageTitle.textContent = 'Pyxis';
+            botMessageTitle.innerHTML = `Pyxis: ${data.response.replace(/\n/g, '<br>')}`;
 
             botMessageHeader.appendChild(botIcon);
             botMessageHeader.appendChild(botMessageTitle);
 
-            const botMessageContent = document.createElement('div');
-            botMessageContent.className = 'message-content';
-
             botMessage.appendChild(botMessageHeader);
-            botMessage.appendChild(botMessageContent);
             messageList.appendChild(botMessage);
 
-            // Добавление кнопок "палец вверх" и "палец вниз"
+            // Add feedback buttons
             const feedbackButtons = document.createElement('div');
             feedbackButtons.className = 'feedback-buttons';
 
             const goodButton = document.createElement('i');
             goodButton.className = 'fa fa-thumbs-up';
-            goodButton.dataset.submitted = 'false';  // Инициализация атрибута данных
+            goodButton.dataset.submitted = 'false';
 
             const badButton = document.createElement('i');
             badButton.className = 'fa fa-thumbs-down';
-            badButton.dataset.submitted = 'false';  // Инициализация атрибута данных
+            badButton.dataset.submitted = 'false';
 
             feedbackButtons.appendChild(goodButton);
             feedbackButtons.appendChild(badButton);
@@ -215,22 +177,20 @@ async function sendMessage() {
 
             messageList.scrollTop = messageList.scrollHeight;
 
-            typeMessage(botMessageContent, data.response);
-
-            // Обработчики событий для кнопок обратной связи
+            // Add event listeners for feedback buttons
             goodButton.addEventListener('click', function() {
-                if (goodButton.dataset.submitted === 'true') return;  // Проверка атрибута данных
-                goodButton.style.color = '#000000';  // Изменение цвета кнопки позитивного отзыва
-                submitFeedback(botMessageContent.textContent, '', 'positive'); // Передаем текст сообщения бота
-                goodButton.dataset.submitted = 'true';  // Установка атрибута данных
+                if (goodButton.dataset.submitted === 'true') return;
+                goodButton.style.color = '#000000';
+                submitFeedback(botMessageTitle.textContent, '', 'positive');
+                goodButton.dataset.submitted = 'true';
             });
 
             badButton.addEventListener('click', function() {
-                if (badButton.dataset.submitted === 'true') return;  // Проверка атрибута данных
-                badButton.style.color = '#000000';  // Изменение цвета кнопки отрицательного отзыва
-                feedbackMessageText.textContent = botMessageContent.textContent;
+                if (badButton.dataset.submitted === 'true') return;
+                badButton.style.color = '#000000';
+                feedbackMessageText.textContent = botMessageTitle.textContent;
                 modal.style.display = 'block';
-                badButton.dataset.submitted = 'true';  // Установка атрибута данных
+                badButton.dataset.submitted = 'true';
             });
         }
     } catch (error) {

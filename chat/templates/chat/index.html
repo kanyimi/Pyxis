@@ -84,24 +84,33 @@
                     <img src="static/img/control.svg" alt="KRAKEN CONTROL">
                 </a>
             </span>
+
         </nav>
 
     </div>
+<!--        <div class="header-right">-->
+<!--            {% if user.is_authenticated %}-->
+<!--                <span>Welcome, {{ user.username }} !</span> |-->
+<!--                <a href="{% url 'logout' %}">Logout</a>-->
+<!--            {% else %}-->
+<!--                <a href="{% url 'register' %}">Register</a> |-->
+<!--                <a href="{% url 'login' %}">Login</a>-->
+<!--            {% endif %}-->
+<!--        </div>-->
     <div class="header-right">
         <img src="{% static 'img/px.svg' %}" alt="Logo" class="logo">
     </div>
 </header>
+
 <main class="main">
     <div id="chat-container" class="chat-container">
         <ul id="messages-list" class="messages-list">
             {% for chat in chat_history %}
-                <li class="message {% if chat.sender == 'user' %}user-message{% else %}bot-message{% endif %}">
+                <li class="message {% if chat.sender_type == 'user' %}user-message{% else %}bot-message{% endif %}">
                     <div class="message-header">
-                        <img src="{% static 'img/chaticon/' %}{% if chat.sender == 'user' %}usrw.png{% else %}pyxw.png{% endif %}" alt="{% if chat.sender == 'user' %}User{% else %}Pyxis{% endif %}">
-                        <span>{% if chat.sender == 'user' %}Вы{% else %}Pyxis{% endif %}</span>
-                         <span class="message-time">{{ message.created_at|date:"H:i:s" }}</span>
+                        <img src="{% static 'img/chaticon/' %}{% if chat.sender_type == 'user' %}usrw.png{% else %}pyxw.png{% endif %}" alt="{% if chat.sender_type == 'user' %}User{% else %}Pyxis{% endif %}">
+                        <span>{% if chat.sender_type == 'user' %}Вы:{% else %}Pyxis:{% endif %} {{ chat.message }}</span>
                     </div>
-                    <div class="message-content">{{ chat.message|linebreaksbr }}</div>
                 </li>
             {% endfor %}
         </ul>

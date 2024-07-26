@@ -56,6 +56,22 @@ body {
     align-items: center;
     padding: 0 20px;
 }
+.header-right a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.header-right span {
+    color: white;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.header-right a:hover {
+    text-decoration: underline;
+}
 
 /* Стили для десктопных устройств */
 @media (min-width: 768px) {
@@ -465,3 +481,106 @@ button:hover {
     transition: color 0.3s;
 }
 
+        .registration-container {
+             background-color: rgba(31, 31, 31, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+            color: white;
+        }
+
+        .registration-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .registration-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .registration-container form button {
+            background-color: rgba(31, 31, 31, 0.5);
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .registration-container form button:hover {
+            background-color: #0056b3;
+        }
+
+        .errorlist {
+            color: red;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+
+        .login-container {
+            background-color: rgba(31, 31, 31, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+            color: white;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container form button {
+            background-color: rgba(31, 31, 31, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-container form button:hover {
+            background-color: #0056b3;
+        }
+
+        .login-messages {
+            color: red;
+            list-style: none;
+            padding: 0;
+        }
+
+
+        .outer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .main1 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 180px;
+    padding-bottom: 70px;
+    overflow: hidden;
+    width: 100%;
+    margin: 10px 0;
+    box-sizing: border-box;
+    position: relative;
+
+}

@@ -40,6 +40,7 @@ class ChatHistory(models.Model):
     message = models.TextField()
     sender = models.CharField(max_length=10, choices=[('user', 'User'), ('bot', 'Bot')])
     created_at = models.DateTimeField(auto_now_add=True)
+    attributes = models.JSONField(default=dict)
 
     def __str__(self):
         return f"ChatHistory {self.id} - {self.session_key} - {self.sender} - {self.created_at}"
