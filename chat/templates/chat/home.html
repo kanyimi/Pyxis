@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Widget</title>
+    <link rel="stylesheet" href="{% static 'css/widget.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <div id="support-widget" class="chat-container">
+    <div class="widget-header">
+      <span id="close-widget-btn" class="close-widget-btn">&times;</span>
+    </div>
+    <ul id="widget-messages-list" class="messages-list">
+      {% for chat in chat_history %}
+        <li class="message {% if chat.sender_type == 'user' %}user-message{% else %}bot-message{% endif %}">
+          <div class="message-header">
+            {% if chat.sender_type == 'user' %}
+              <img src="{% static 'img/chaticon/usrw.png' %}" alt="User">
+            {% else %}
+              <img src="{% static 'img/chaticon/pyxw.png' %}" alt="Pyxis">
+            {% endif %}
+            <span>{% if chat.sender_type == 'user' %}Вы:{% else %}Pyxis:{% endif %} {{ chat.message }}</span>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <div id="widget-typing-indicator" class="typing-indicator" style="display: none; font-size: small;"></div>
+    <div class="input-container">
+      <input type="text" id="widget-message-input" placeholder="Введите сообщение...">
+      <button id="widget-send-button" onclick="sendWidgetMessage()" disabled><i class="fa fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <button id="open-widget-btn" class="open-widget-btn">+</button>
+  <div id="feedback-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Обратная связь</h2>
+      <p id="feedback-message-text">Здесь будет текст сообщения</p>
+      <p>Почему этот ответ плохой?</p>
+      <div class="feedback-input-container">
+        <textarea id="feedback-text" class="text-area" rows="4" cols="50"></textarea>
+        <button class="submit-feedback-btn" id="submit-feedback"><i class="fa fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/widget.js' %}"></script>
+</body>
+</html>

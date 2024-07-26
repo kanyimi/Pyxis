@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="main1">
+    <div class="outer-container">
+        <div class="login-container">
+            <h2>Login</h2>
+            {% if messages %}
+                <ul class="login-messages">
+                    {% for message in messages %}
+                        <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div>
+                    {{ form.username.label_tag }} {{ form.username }}
+                    {{ form.username.errors }}
+                </div>
+                <div>
+                    {{ form.password.label_tag }} {{ form.password }}
+                    {{ form.password.errors }}
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        </div>
+    </div>
+</main>
+{% endblock %}

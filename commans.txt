@@ -1,0 +1,4 @@
+source venv/bin/activate
+cd ~/PycharmProjects/Pyxis
+sudo systemctl restart gunicorn
+sudo ln -s /etc/nginx/sites-available/PycharmProjects /etc/nginx/sites-enabled

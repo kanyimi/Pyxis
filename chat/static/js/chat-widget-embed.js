@@ -1,0 +1,26 @@
+(function() {
+    // Create the container for the iframe
+    var container = document.createElement('div');
+    container.style.position = 'fixed';
+    container.style.bottom = '20px';
+    container.style.right = '20px';
+    container.style.width = '450px';
+    container.style.height = '500px';
+    container.style.zIndex = '1000';
+    container.style.overflow = 'hidden';
+    container.style.background = 'transparent';
+
+        // Create the iframe
+    var chatIframe = document.createElement('iframe');
+    chatIframe.src = 'https://9a05-176-52-24-234.ngrok-free.app/home';
+    chatIframe.style.width = '100%';
+    chatIframe.style.height = '100%';
+    chatIframe.style.border = 'none';
+    chatIframe.style.background = 'transparent';
+
+    // Append the iframe to the container
+    container.appendChild(chatIframe);
+
+    // Append the container to the body
+    document.body.appendChild(container);
+})();

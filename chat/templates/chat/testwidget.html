@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Widget</title>
+    <link rel="stylesheet" href="{% static 'css/testwidget.css' %}">
+
+    <div id="support-widget" class="chat-container">
+        <div class="widget-header">
+            <span id="close-widget-btn" class="close-widget-btn">&times;</span>
+        </div>
+        <ul id="widget-messages-list" class="messages-list"></ul>
+        <div id="widget-typing-indicator" class="typing-indicator" style="display: none; font-size: small;"></div>
+        <div class="input-container">
+            <input type="text" id="widget-message-input" placeholder="Введите сообщение...">
+            <button id="widget-send-button" disabled><i class="fa fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <button id="open-widget-btn" class="open-widget-btn">+</button>
+    <div id="feedback-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Обратная связь</h2>
+            <p id="feedback-message-text">Здесь будет текст сообщения</p>
+            <p>Почему этот ответ плохой?</p>
+            <textarea id="feedback-text" rows="4" cols="50"></textarea>
+            <button id="submit-feedback">Отправить</button>
+        </div>
+    </div>
+    <script src="{% static 'js/test.js' %}"></script>
+</body>
+</html>
