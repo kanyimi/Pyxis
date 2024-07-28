@@ -1,4 +1,16 @@
 source venv/bin/activate
 cd ~/PycharmProjects/Pyxis
 sudo systemctl restart gunicorn
+sudo systemctl status gunicorn
+sudo systemctl status nginx
+
 sudo ln -s /etc/nginx/sites-available/PycharmProjects /etc/nginx/sites-enabled
+
+ls -l /home/ubuntu/venv/Pyxis/bin/gunicorn
+ExecStart=/home/ubuntu/.virtualenvs/Pyxis/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/ubuntu/Pyxis/pyxis.sock Pyxis.wsgi:application
+
+scp /C/Users/User/OneDrive/Desktop/ca-certificates ubuntu@185.100.87.158:/home/ubuntu/certificates
+scp /path/to/local/client.key ubuntu@your_server_ip:/path/to/server/client.key
+
+scp -r ubuntu@185.100.87.158:/home/ubuntu/PycharmProjects/chat/static/img /mnt/c/Users/User/Downloads/krn/
+
