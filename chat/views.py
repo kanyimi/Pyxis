@@ -18,29 +18,18 @@ def index(request):
     identifier = request.user.username if request.user.is_authenticated else session_key
     chat_history = ChatHistory.objects.filter(session_key=identifier).order_by('created_at')
 
+    # Exclude the last bot message
+
     # Determine sender type
     for chat in chat_history:
         chat.sender_type = 'user' if chat.sender == request.user.username or chat.sender.startswith('session_') else 'bot'
+
     context = {
         "chat_history": chat_history,
     }
     return render(request, 'chat/index.html', context)
 
-def home(request):
-    if not request.session.session_key:
-        request.session.create()
 
-    session_key = request.session.session_key
-    identifier = request.user.username if request.user.is_authenticated else session_key
-
-    chat_history = ChatHistory.objects.filter(session_key=identifier).order_by('created_at')
-    # Determine sender type
-    for chat in chat_history:
-        chat.sender_type = 'user' if chat.sender == request.user.username or chat.sender.startswith('session_') else 'bot'
-    context = {
-        "chat_history": chat_history,
-    }
-    return render(request, "chat/home.html", context)
 
 @csrf_exempt
 def send_message_to_external_api(request):
@@ -57,7 +46,10 @@ def send_message_to_external_api(request):
                 identifier = request.session.session_key
                 sender = f'session_{identifier}'
 
-            ChatHistory.objects.create(session_key=identifier, message=data['content'], sender=sender)
+            # Format the message content
+            formatted_content =  data['content'].replace('\n', '')
+
+            ChatHistory.objects.create(session_key=identifier, message=formatted_content, sender=sender)
 
             response = requests.post(
                 'https://213.199.32.2',
@@ -65,14 +57,17 @@ def send_message_to_external_api(request):
                     'Content-Type': 'application/json',
                     'Authorization': '50jsh291g-636f-4891-b1ed-706e9ad7970f_721bap7nan'
                 },
-                json=data,
+                json={'content': formatted_content, 'message_id': data.get('message_id', '')},
                 cert=('C:/Users/User/OneDrive/Desktop/ca-certificates/client.crt',
                       'C:/Users/User/OneDrive/Desktop/ca-certificates/client.key'),
                 verify=False
             )
 
             bot_response = response.json()
+
             if 'response' in bot_response:
+                bot_response['response'] = bot_response['response'].replace('\n', '')
+
                 ChatHistory.objects.create(session_key=identifier, message=bot_response['response'], sender='bot')
 
             return JsonResponse(bot_response, status=response.status_code)
@@ -83,6 +78,9 @@ def send_message_to_external_api(request):
     else:
         return JsonResponse({'error': 'This method is not allowed'}, status=405)
 
+def home(request):
+
+    return render(request, "chat/home.html")
 @csrf_exempt
 def submit_feedback(request):
     if request.method == 'POST':
