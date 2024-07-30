@@ -49,7 +49,7 @@
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    background-image: url('/static/img/pwidjet.svg');
+    background-image: url('/static/img/widget.png');
     background-size: 120%;
     background-position: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);

@@ -12,7 +12,7 @@
 
         // Create the iframe
     var chatIframe = document.createElement('iframe');
-    chatIframe.src = 'https://9a05-176-52-24-234.ngrok-free.app/home';
+    chatIframe.src = 'https://kpyx.co/home';
     chatIframe.style.width = '100%';
     chatIframe.style.height = '100%';
     chatIframe.style.border = 'none';

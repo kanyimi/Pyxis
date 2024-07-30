@@ -1,7 +1,10 @@
 source venv/bin/activate
 cd ~/PycharmProjects/Pyxis
 sudo systemctl restart gunicorn
+sudo systemctl restart nginx
 sudo systemctl status gunicorn
+
+
 sudo systemctl status nginx
 
 sudo ln -s /etc/nginx/sites-available/PycharmProjects /etc/nginx/sites-enabled
@@ -14,3 +17,5 @@ scp /path/to/local/client.key ubuntu@your_server_ip:/path/to/server/client.key
 
 scp -r ubuntu@185.100.87.158:/home/ubuntu/PycharmProjects/chat/static/img /mnt/c/Users/User/Downloads/krn/
 
+//open nginx configuration
+sudo nano /etc/nginx/sites-available/pyxis

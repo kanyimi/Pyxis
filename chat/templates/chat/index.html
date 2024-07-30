@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
     <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" nomodule></script>
+
 </head>
 <body>
 <div class="background">
@@ -57,7 +58,7 @@
                 </a>
             </span>
             <span style="--i:3;--x:0;--y:1;">
-                <a href="https://2kr.app" target="_blank">
+                <a href="https://kkrn.co" target="_blank">
                     <img src="static/img/calc.svg" alt="КАЛЬКУЛЯТОР_К">
                 </a>
             </span>
@@ -67,7 +68,7 @@
                 </a>
             </span>
             <span style="--i:5;--x:-1;--y:-1;">
-                <a href="https://kraken13.at">
+                <a href="https://kraken18.at">
                     <img src="static/img/krn.svg" alt="KRAKEN">
                 </a>
             </span>
@@ -102,18 +103,24 @@
     </div>
 </header>
 
-<main class="main">
+ <main class="main">
     <div id="chat-container" class="chat-container">
+        <div>
+        <div id="welcome-message" class="welcome-message"></div>
+        <br>
         <ul id="messages-list" class="messages-list">
+            <!-- Chat history from the database -->
             {% for chat in chat_history %}
                 <li class="message {% if chat.sender_type == 'user' %}user-message{% else %}bot-message{% endif %}">
                     <div class="message-header">
                         <img src="{% static 'img/chaticon/' %}{% if chat.sender_type == 'user' %}usrw.png{% else %}pyxw.png{% endif %}" alt="{% if chat.sender_type == 'user' %}User{% else %}Pyxis{% endif %}">
-                        <span>{% if chat.sender_type == 'user' %}Вы:{% else %}Pyxis:{% endif %} {{ chat.message }}</span>
+                        <span>{% if chat.sender_type == 'user' %}Вы:{% else %}Pyxis:{% endif %} {{ chat.message|linebreaksbr }}</span>
                     </div>
                 </li>
             {% endfor %}
+
         </ul>
+            </div>
         <div id="typing-indicator" class="typing-indicator" style="display: none; font-size: small;"></div>
     </div>
     <div id="input-container" class="input-container">
@@ -122,13 +129,29 @@
     </div>
 </main>
 
+
 <footer class="footer">
     <p>© 2024 Pyxis AI. Все права защищены.</p>
 </footer>
 
 <script src="{% static 'js/script.js' %}"></script>
 <script src="{% static 'js/mscript.js' %}"></script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]function(){(m[i].a=m[i].a[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
+   ym(97529449, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/97529449" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 
 <!-- Модальное окно для обратной связи -->
 <div id="feedback-modal" class="modal">
@@ -137,8 +160,10 @@
     <h2>Обратная связь</h2>
     <p id="feedback-message-text">Здесь будет текст сообщения</p>
     <p>Почему этот ответ плохой?</p>
-    <textarea id="feedback-text" rows="4" cols="50"></textarea>
-    <button id="submit-feedback">Отправить</button>
+  <div class="feedback-input-container">
+    <textarea id="feedback-text" class="text-area" rows="4" cols="50"></textarea>
+    <button class="submit-feedback-btn" id="submit-feedback"><i class="fa fa-paper-plane"></i></button>
+  </div>
   </div>
 </div>
 

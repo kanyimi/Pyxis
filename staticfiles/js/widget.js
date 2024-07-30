@@ -1,17 +1,18 @@
+
 let modal, span, submitFeedbackButton, feedbackText, feedbackMessageText;
 
 document.addEventListener('DOMContentLoaded', function() {
+    displayWelcomeMessage();
+
     const messageInput = document.getElementById('widget-message-input');
     const sendButton = document.getElementById('widget-send-button');
     const openWidgetButton = document.getElementById('open-widget-btn');
     const closeWidgetButton = document.getElementById('close-widget-btn');
     const supportWidget = document.getElementById('support-widget');
-    const messageList = document.getElementById('widget-messages-list');
 
     openWidgetButton.addEventListener('click', function() {
         supportWidget.style.display = 'flex';
         openWidgetButton.style.display = 'none';
-        scrollToBottom();
     });
 
     closeWidgetButton.addEventListener('click', function() {
@@ -32,14 +33,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize elements related to the modal window
+    // Инициализация элементов, связанных с модальным окном
     modal = document.getElementById('feedback-modal');
     span = document.getElementsByClassName('close')[0];
     submitFeedbackButton = document.getElementById('submit-feedback');
     feedbackText = document.getElementById('feedback-text');
     feedbackMessageText = document.getElementById('feedback-message-text');
 
-    // Close the modal window
+    // Закрытие модального окна
     span.onclick = function() {
         modal.style.display = 'none';
     }
@@ -50,22 +51,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Submit feedback
+    // Отправка обратной связи
     submitFeedbackButton.addEventListener('click', function() {
         const feedbackContent = feedbackText.value.trim();
         const botMessageContent = feedbackMessageText.textContent;
         submitFeedback(botMessageContent, feedbackContent, 'negative');
     });
-
-    function scrollToBottom() {
-        messageList.scrollTop = messageList.scrollHeight;
-    }
-
-    // Ensure the chat scrolls to the bottom when the modal is opened
-    modal.addEventListener('show', function() {
-        scrollToBottom();
-    });
 });
+
+function displayWelcomeMessage() {
+    const messageList = document.getElementById('widget-messages-list');
+    const botMessage = document.createElement('li');
+    botMessage.className = 'message bot-message';
+
+    const botMessageContent = document.createElement('div');
+    botMessageContent.className = 'message-content';
+
+    const botIcon = document.createElement('img');
+    botIcon.src = 'https://kpyx.co/static/img/chaticon/pyxw.png';
+    botIcon.alt = 'Pyxis';
+    botIcon.className = 'message-icon';
+
+    const botMessageTitle = document.createElement('span');
+    botMessageTitle.className = 'message-title';
+    botMessageTitle.textContent = ' Pyxis: ';
+
+    const botTextContent = document.createElement('span');
+    botTextContent.className = 'text-content';
+
+    botMessageContent.appendChild(botIcon);
+    botMessageContent.appendChild(botMessageTitle);
+    botMessageContent.appendChild(botTextContent);
+    botMessage.appendChild(botMessageContent);
+    messageList.appendChild(botMessage);
+
+    const welcomeText = "Здравствуйте! Я Pyxis - искусственный интеллект, созданный командой KRAKEN для оперативной помощи нашим пользователям, покупателям и продавцам. Обращаю ваше внимание, что сейчас я нахожусь на стадии бета-тестирования, обучение - долгий процесс, но с вашей помощью он может пройти быстрее!";
+    typeMessage(botTextContent, welcomeText);
+}
+
 function typeMessage(element, text, callback) {
     let index = 0;
     const boldRegex = /\*\*(.*?)\*\*/g;
@@ -106,6 +129,7 @@ function typeMessage(element, text, callback) {
 
     type();
 }
+
 async function sendWidgetMessage() {
     const messageInput = document.getElementById('widget-message-input');
     const messageText = messageInput.value.trim();
@@ -119,38 +143,46 @@ async function sendWidgetMessage() {
     const userMessage = document.createElement('li');
     userMessage.className = 'message user-message';
 
-    const userMessageHeader = document.createElement('div');
-    userMessageHeader.className = 'message-header';
+    const userMessageContent = document.createElement('div');
+    userMessageContent.className = 'message-content';
 
     const userIcon = document.createElement('img');
-    userIcon.src = 'static/img/chaticon/usrw.png';
+    userIcon.src = 'https://kpyx.co/static/img/chaticon/usrw.png';
     userIcon.alt = 'User';
+    userIcon.className = 'message-icon';
 
     const userMessageTitle = document.createElement('span');
-    userMessageTitle.innerHTML = `Вы: ${messageText}`; // Ensure no line break here
+    userMessageTitle.className = 'message-title';
+    userMessageTitle.textContent = ' Вы: ';
 
-    userMessageHeader.appendChild(userIcon);
-    userMessageHeader.appendChild(userMessageTitle);
+    const userTextContent = document.createElement('span');
+    userTextContent.className = 'text-content';
+    userTextContent.innerHTML = messageText.replace(/\n/g, '<br>');
 
-    userMessage.appendChild(userMessageHeader);
-    messageList.appendChild(userMessage); // Append user message to the end
+    userMessageContent.appendChild(userIcon);
+    userMessageContent.appendChild(userMessageTitle);
+    userMessageContent.appendChild(userTextContent);
+    userMessage.appendChild(userMessageContent);
+    messageList.insertBefore(userMessage, messageList.firstChild);
 
     const typingIndicator = document.createElement('li');
     typingIndicator.id = 'widget-typing-indicator';
     typingIndicator.className = 'message typing-indicator';
-    messageList.appendChild(typingIndicator); // Append typing indicator to the end
+    messageList.insertBefore(typingIndicator, messageList.firstChild);
 
     messageList.scrollTop = messageList.scrollHeight;
 
     try {
-        const response = await fetch('/api/send_message', {
+        const formattedMessage = `${messageText.replace(/\n/g, '')}`;
+        console.log(formattedMessage)
+        const response = await fetch('https://kpyx.co/api/send_message', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': '50jsh291g-636f-4891-b1ed-706e9ad7970f_721bap7nan'
             },
             body: JSON.stringify({
-                content: messageText,
+                content: formattedMessage,
                 message_id: 'unique_message_270'
             })
         });
@@ -162,23 +194,28 @@ async function sendWidgetMessage() {
             const botMessage = document.createElement('li');
             botMessage.className = 'message bot-message';
 
-            const botMessageHeader = document.createElement('div');
-            botMessageHeader.className = 'message-header';
+            const botMessageContent = document.createElement('div');
+            botMessageContent.className = 'message-content';
 
             const botIcon = document.createElement('img');
-            botIcon.src = 'static/img/chaticon/pyxw.png';
+            botIcon.src = 'https://kpyx.co/static/img/chaticon/pyxw.png';
             botIcon.alt = 'Pyxis';
+            botIcon.className = 'message-icon';
 
             const botMessageTitle = document.createElement('span');
-            botMessageTitle.innerHTML = `Pyxis: ${data.response}`; // Ensure no line break here
+            botMessageTitle.className = 'message-title';
+            botMessageTitle.textContent = 'Pyxis: ';
 
-            botMessageHeader.appendChild(botIcon);
-            botMessageHeader.appendChild(botMessageTitle);
+            const botTextContent = document.createElement('span');
+            botTextContent.className = 'text-content';
 
-            botMessage.appendChild(botMessageHeader);
-            messageList.appendChild(botMessage); // Append bot message to the end
+            botMessageContent.appendChild(botIcon);
+            botMessageContent.appendChild(botMessageTitle);
+            botMessageContent.appendChild(botTextContent);
+            botMessage.appendChild(botMessageContent);
+            messageList.insertBefore(botMessage, messageList.firstChild);
 
-            // Add feedback buttons
+            // Добавление кнопок "палец вверх" и "палец вниз"
             const feedbackButtons = document.createElement('div');
             feedbackButtons.className = 'feedback-buttons';
 
@@ -195,34 +232,58 @@ async function sendWidgetMessage() {
             botMessage.appendChild(feedbackButtons);
 
             messageList.scrollTop = messageList.scrollHeight;
-//            typeMessage(botMessageContent, data.response);
 
-            // Feedback buttons event handlers
+            typeMessage(botTextContent, data.response);
+
+            // Обработчики событий для кнопок обратной связи
             goodButton.addEventListener('click', function() {
                 if (goodButton.dataset.submitted === 'true') return;
                 goodButton.style.color = '#000000';
-                submitFeedback(data.response, '', 'positive');
+                submitFeedback(botMessageContent.textContent, '', 'positive');
                 goodButton.dataset.submitted = 'true';
             });
 
             badButton.addEventListener('click', function() {
                 if (badButton.dataset.submitted === 'true') return;
                 badButton.style.color = '#000000';
-                feedbackMessageText.textContent = data.response;
+                feedbackMessageText.textContent = botTextContent.textContent;
                 modal.style.display = 'block';
                 badButton.dataset.submitted = 'true';
             });
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred during the request. Please check the console for more information.');
+        alert('Произошла ошибка при запросе. Пожалуйста, проверьте консоль для получения дополнительной информации.');
         typingIndicator.remove();
     }
 }
 
+
+function submitFeedback(botMessage, feedback, type) {
+    fetch('https://kpyx.co/api/submit_feedback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': '50jsh291g-636f-4891-b1ed-706e9ad7970f_721bap7nan'
+        },
+        body: JSON.stringify({
+            bot_message: botMessage,
+            feedback: feedback,
+            feedback_type: type
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Feedback submitted successfully:', data);
+    })
+    .catch(error => {
+        console.error('Error submitting feedback:', error);
+    });
+}
+
 async function submitFeedback(botMessageContent, feedbackContent, feedbackType) {
     try {
-        const response = await fetch('/api/submit_feedback/', {
+        const response = await fetch('https://kpyx.co/api/submit_feedback/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -235,134 +296,14 @@ async function submitFeedback(botMessageContent, feedbackContent, feedbackType) 
         });
 
         if (response.ok) {
-            alert('Feedback submitted successfully');
+            alert('Обратная связь успешно отправлена');
             feedbackText.value = '';
             modal.style.display = 'none';
         } else {
-            alert('Failed to submit feedback');
+            alert('Не удалось отправить обратную связь');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred while submitting feedback. Please check the console for more information.');
+        alert('Произошла ошибка при отправке обратной связи. Пожалуйста, проверьте консоль для получения дополнительной информации.');
     }
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    const lines = document.querySelectorAll(".line");
-
-    lines.forEach(line => {
-        const totalWords = 1; // Уменьшаем количество слов
-        const wordElements = [];
-
-        for (let i = 0; i < totalWords; i++) {
-            const word = document.createElement('div');
-            word.classList.add('word');
-            word.style.opacity = 0; // Устанавливаем начальное значение opacity в 0
-            wordElements.push(word);
-            line.appendChild(word);
-        }
-
-        function generateWord(wordElement) {
-            const letters = "pyxis".split('');
-            let letterIndex = 0;
-
-            const animateLetter = () => {
-                wordElement.innerText = letters[letterIndex];
-                wordElement.style.opacity = 1;
-                setTimeout(() => { wordElement.style.opacity = 0; }, 1600); // Замедляем исчезновение буквы
-
-                letterIndex = (letterIndex + 1) % letters.length;
-                requestAnimationFrame(() => {
-                    setTimeout(animateLetter, 400); // Замедляем смену буквы
-                });
-            };
-            animateLetter();
-        }
-
-        // Добавляем случайную задержку для каждой линии
-        const randomDelay = Math.random() * 20; // случайная задержка от 0 до 20 секунд
-        line.style.animationDelay = `${randomDelay}s`;
-
-        wordElements.forEach((wordElement, index) => {
-            setTimeout(() => {
-                generateWord(wordElement);
-            }, randomDelay * 1000 + index * 2000); // начинаем анимацию после случайной задержки
-        });
-    });
-});
-document.addEventListener("DOMContentLoaded", function() {
-    const lines = document.querySelectorAll(".line");
-
-    lines.forEach(line => {
-        const totalWords = 1; // Уменьшаем количество слов
-        const wordElements = [];
-
-        for (let i = 0; i < totalWords; i++) {
-            const word = document.createElement('div');
-            word.classList.add('word');
-            word.style.opacity = 0; // Устанавливаем начальное значение opacity в 0
-            wordElements.push(word);
-            line.appendChild(word);
-        }
-
-        function generateWord(wordElement) {
-            const letters = "pyxis".split('');
-            let letterIndex = 0;
-
-            const animateLetter = () => {
-                wordElement.innerText = letters[letterIndex];
-                wordElement.style.opacity = 1;
-                setTimeout(() => { wordElement.style.opacity = 0; }, 1600); // Замедляем исчезновение буквы
-
-                letterIndex = (letterIndex + 1) % letters.length;
-                requestAnimationFrame(() => {
-                    setTimeout(animateLetter, 400); // Замедляем смену буквы
-                });
-            };
-            animateLetter();
-        }
-
-        // Добавляем случайную задержку для каждой линии
-        const randomDelay = Math.random() * 20; // случайная задержка от 0 до 20 секунд
-        line.style.animationDelay = `${randomDelay}s`;
-
-        wordElements.forEach((wordElement, index) => {
-            setTimeout(() => {
-                generateWord(wordElement);
-            }, randomDelay * 1000 + index * 2000); // начинаем анимацию после случайной задержки
-        });
-    });
-});
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const navItems = document.querySelectorAll('.navigation span');
-
-    navItems.forEach(function(item) {
-        const img = item.querySelector('img');
-        const tooltipText = img.getAttribute('alt');
-
-        item.addEventListener('mouseenter', function(event) {
-            if (document.querySelector('.navigation').classList.contains('active')) {
-                const tooltip = document.createElement('div');
-                tooltip.className = 'tooltip';
-                tooltip.textContent = tooltipText;
-                document.body.appendChild(tooltip);
-
-                const updateTooltipPosition = (e) => {
-                    tooltip.style.left = e.pageX + 'px';
-                    tooltip.style.top = (e.pageY + 20) + 'px'; // Смещение на 20px ниже курсора
-                };
-
-                updateTooltipPosition(event);
-
-                item.addEventListener('mousemove', updateTooltipPosition);
-
-                item.addEventListener('mouseleave', function() {
-                    document.body.removeChild(tooltip);
-                }, { once: true });
-            }
-        });
-    });
-});

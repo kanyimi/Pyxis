@@ -2,7 +2,8 @@
 let modal, span, submitFeedbackButton, feedbackText, feedbackMessageText;
 
 document.addEventListener('DOMContentLoaded', function() {
-//    displayWelcomeMessage();
+    // Call the function to display the welcome message
+    displayWelcomeMessage();
 
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
@@ -19,14 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    // Инициализация элементов, связанных с модальным окном
+
+    // Modal window elements initialization
     modal = document.getElementById('feedback-modal');
     span = document.getElementsByClassName('close')[0];
     submitFeedbackButton = document.getElementById('submit-feedback');
     feedbackText = document.getElementById('feedback-text');
     feedbackMessageText = document.getElementById('feedback-message-text');
 
-    // Закрытие модального окна
+    // Modal window close
     span.onclick = function() {
         modal.style.display = 'none';
     }
@@ -37,13 +39,42 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Отправка обратной связи
+    // Feedback submission
     submitFeedbackButton.addEventListener('click', function() {
         const feedbackContent = feedbackText.value.trim();
         const botMessageContent = feedbackMessageText.textContent;
         submitFeedback(botMessageContent, feedbackContent, 'negative');
     });
 });
+
+function displayWelcomeMessage() {
+    const welcomeMessageDiv = document.getElementById('welcome-message');
+    const botMessage = document.createElement('div');
+    botMessage.className = 'message bot-message';
+
+    const botMessageHeader = document.createElement('div');
+    botMessageHeader.className = 'message-header';
+
+    const botIcon = document.createElement('img');
+    botIcon.src = 'static/img/chaticon/pyxw.png';
+    botIcon.alt = 'Pyxis';
+
+    const botMessageTitle = document.createElement('span');
+    botMessageTitle.textContent = 'Pyxis';
+
+    botMessageHeader.appendChild(botIcon);
+    botMessageHeader.appendChild(botMessageTitle);
+
+    const botMessageContent = document.createElement('div');
+    botMessageContent.className = 'message-content';
+    botMessage.appendChild(botMessageHeader);
+    botMessage.appendChild(botMessageContent);
+    welcomeMessageDiv.appendChild(botMessage);
+
+    const welcomeText = "Здравствуйте! Я Pyxis - искусственный интеллект, созданный командой KRAKEN для оперативной помощи нашим пользователям, покупателям и продавцам. Обращаю ваше внимание, что сейчас я нахожусь на стадии бета-тестирования, обучение - долгий процесс, но с вашей помощью он может пройти быстрее!";
+
+    typeMessage(botMessageContent, welcomeText);
+}
 
 function typeMessage(element, text, callback) {
     let index = 0;
@@ -90,6 +121,7 @@ function typeMessage(element, text, callback) {
 async function sendMessage() {
     const messageInput = document.getElementById('message-input');
     const messageText = messageInput.value.trim();
+
     if (messageText === '') return;
 
     messageInput.value = '';
@@ -124,6 +156,8 @@ async function sendMessage() {
     messageList.scrollTop = messageList.scrollHeight;
 
     try {
+        const formattedMessage = `${messageText.replace(/\n/g, '')}`;
+        console.log(formattedMessage)
         const response = await fetch('/api/send_message', {
             method: 'POST',
             headers: {
@@ -131,7 +165,7 @@ async function sendMessage() {
                 'Authorization': '50jsh291g-636f-4891-b1ed-706e9ad7970f_721bap7nan'
             },
             body: JSON.stringify({
-                content: messageText,
+                content: formattedMessage,
                 message_id: 'unique_message_270'
             })
         });
@@ -153,10 +187,14 @@ async function sendMessage() {
             const botMessageTitle = document.createElement('span');
             botMessageTitle.innerHTML = `Pyxis: ${data.response.replace(/\n/g, '<br>')}`;
 
+
+            const botMessageContent = document.createElement('div');
+            botMessageContent.className = 'message-content';
             botMessageHeader.appendChild(botIcon);
             botMessageHeader.appendChild(botMessageTitle);
 
             botMessage.appendChild(botMessageHeader);
+            botMessage.appendChild(botMessageContent);
             messageList.appendChild(botMessage);
 
             // Add feedback buttons
@@ -176,7 +214,7 @@ async function sendMessage() {
             botMessage.appendChild(feedbackButtons);
 
             messageList.scrollTop = messageList.scrollHeight;
-
+//            typeMessage(botMessageContent, data.response);
             // Add event listeners for feedback buttons
             goodButton.addEventListener('click', function() {
                 if (goodButton.dataset.submitted === 'true') return;
@@ -199,6 +237,7 @@ async function sendMessage() {
         typingIndicator.remove();
     }
 }
+
 
 function submitFeedback(botMessage, feedback, type) {
     fetch('/api/submit_feedback', {
