@@ -157,7 +157,7 @@ async function sendMessage() {
 
     try {
         const formattedMessage = `${messageText.replace(/\n/g, '')}`;
-        console.log(formattedMessage)
+
         const response = await fetch('/api/send_message', {
             method: 'POST',
             headers: {

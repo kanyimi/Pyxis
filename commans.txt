@@ -1,5 +1,10 @@
 source venv/bin/activate
-cd ~/PycharmProjects/Pyxis
+
+git reset --hard
+git clean -fd
+git pull origin master
+python manage.py collectstatic --noinput
+
 sudo systemctl restart gunicorn
 sudo systemctl restart nginx
 sudo systemctl status gunicorn
