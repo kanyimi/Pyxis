@@ -48,6 +48,16 @@ def send_message_to_external_api(request):
 
             # Format the message content
             formatted_content =  data['content'].replace('\n', '')
+            # print("formatted content:", formatted_content)
+
+            # Count the number of characters in formatted_content
+            character_count = len(formatted_content)
+            # print("Number of characters in formatted_content:", character_count)
+
+            # Truncate the content if it exceeds 20 characters
+
+            formatted_content = formatted_content[:2500]
+            # print("Truncated formatted content:", formatted_content)
 
             ChatHistory.objects.create(session_key=identifier, message=formatted_content, sender=sender)
 

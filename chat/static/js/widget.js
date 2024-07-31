@@ -163,14 +163,14 @@ async function sendWidgetMessage() {
     userMessageContent.appendChild(userMessageTitle);
     userMessageContent.appendChild(userTextContent);
     userMessage.appendChild(userMessageContent);
-    messageList.insertBefore(userMessage, messageList.firstChild);
+    messageList.appendChild(userMessage);
 
     const typingIndicator = document.createElement('li');
     typingIndicator.id = 'widget-typing-indicator';
     typingIndicator.className = 'message typing-indicator';
-    messageList.insertBefore(typingIndicator, messageList.firstChild);
+    messageList.appendChild(typingIndicator);
 
-    messageList.scrollTop = messageList.scrollHeight;
+     messageList.scrollTop = messageList.scrollHeight;
 
     try {
         const formattedMessage = `${messageText.replace(/\n/g, '')}`;
@@ -213,7 +213,7 @@ async function sendWidgetMessage() {
             botMessageContent.appendChild(botMessageTitle);
             botMessageContent.appendChild(botTextContent);
             botMessage.appendChild(botMessageContent);
-            messageList.insertBefore(botMessage, messageList.firstChild);
+            messageList.appendChild(botMessage);
 
             // Добавление кнопок "палец вверх" и "палец вниз"
             const feedbackButtons = document.createElement('div');
@@ -231,7 +231,7 @@ async function sendWidgetMessage() {
             feedbackButtons.appendChild(badButton);
             botMessage.appendChild(feedbackButtons);
 
-            messageList.scrollTop = messageList.scrollHeight;
+             messageList.scrollTop = messageList.scrollHeight;
 
             typeMessage(botTextContent, data.response);
 
