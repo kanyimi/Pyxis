@@ -80,7 +80,7 @@
     flex-grow: 1;
     overflow-y: auto;
     display: flex;
-    flex-direction: column;  /* Changed this to column */
+    flex-direction: column;
 }
 
 .input-container {
@@ -160,7 +160,7 @@
 }
 
 .message-content {
-    margin-left: 35px;
+    margin-left: 1px;
 }
 
 .modal {
