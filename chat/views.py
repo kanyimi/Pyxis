@@ -18,16 +18,18 @@ def index(request):
     identifier = request.user.username if request.user.is_authenticated else session_key
     chat_history = ChatHistory.objects.filter(session_key=identifier).order_by('created_at')
 
-
-
     # Determine sender type
     for chat in chat_history:
-        chat.sender_type = 'user' if chat.sender == request.user.username or chat.sender.startswith('session_') else 'bot'
+        if chat.sender == 'user':
+            chat.sender_type = 'user'
+        else:
+            chat.sender_type = 'bot'
 
     context = {
         "chat_history": chat_history,
     }
     return render(request, 'chat/index.html', context)
+
 
 
 
@@ -42,12 +44,12 @@ def send_message_to_external_api(request):
             # Determine user identifier and sender
             if request.user.is_authenticated:
                 identifier = request.user.username
-                sender = request.user.username
+                sender = "user"
             else:
                 if not request.session.session_key:
                     request.session.create()
                 identifier = request.session.session_key
-                sender = f'session_{identifier}'
+                sender = 'user'
 
             # Retrieve chat history for the identifier
             history = ChatHistory.objects.filter(session_key=identifier).order_by('created_at')
@@ -71,7 +73,7 @@ def send_message_to_external_api(request):
             print("truncated chat history: ", history_text)
 
             # Create a new chat history entry for the user message
-            ChatHistory.objects.create(session_key=identifier, message=formatted_content, sender= sender)
+            ChatHistory.objects.create(session_key=identifier, message=formatted_content, sender = sender)
 
             # Prepare the request payload
             payload = {
