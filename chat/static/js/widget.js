@@ -175,7 +175,7 @@ async function sendWidgetMessage() {
     try {
         const formattedMessage = `${messageText.replace(/\n/g, '')}`;
 
-        const response = await fetch('https://kpyx.co/api/send_message', {
+        const response = await fetch('/api/send_message', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

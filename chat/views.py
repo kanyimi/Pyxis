@@ -31,12 +31,15 @@ def index(request):
 
 
 
+
+
 @csrf_exempt
 def send_message_to_external_api(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
 
+            # Determine user identifier and sender
             if request.user.is_authenticated:
                 identifier = request.user.username
                 sender = request.user.username
@@ -46,28 +49,44 @@ def send_message_to_external_api(request):
                 identifier = request.session.session_key
                 sender = f'session_{identifier}'
 
-            # Format the message content
-            formatted_content =  data['content'].replace('\n', '')
-            # print("formatted content:", formatted_content)
+            # Retrieve chat history for the identifier
+            history = ChatHistory.objects.filter(session_key=identifier).order_by('created_at')
+            history_text = ""
 
-            # Count the number of characters in formatted_content
-            character_count = len(formatted_content)
-            # print("Number of characters in formatted_content:", character_count)
+            # Format the chat history
+            for entry in history:
+                if entry.sender == 'user':
+                    history_text += f"\n\nUSER: {entry.message} "
+                elif entry.sender == 'bot':
+                    history_text += f"\n\nASSISTANT: {entry.message} "
 
-            # Truncate the content if it exceeds 20 characters
+            # Format the current user message
+            formatted_content = data['content'].replace('\\n', '\n').replace('\\\n', '\n').replace('\\\\n', '\n')
+            # history_text += f"USER: {formatted_content}"
+            print("chat history: ", history_text)
+            # Truncate history_text if it exceeds 5000 characters
+            if len(history_text) > 5000:
+                # Keep the most recent 5000 characters
+                history_text = history_text[-5000:]
+            print("truncated chat history: ", history_text)
 
-            formatted_content = formatted_content[:2500]
-            # print("Truncated formatted content:", formatted_content)
+            # Create a new chat history entry for the user message
+            ChatHistory.objects.create(session_key=identifier, message=formatted_content, sender= sender)
 
-            ChatHistory.objects.create(session_key=identifier, message=formatted_content, sender=sender)
+            # Prepare the request payload
+            payload = {
+                'content': f"{history_text}USER: {formatted_content}",
+                'message_id': data.get('message_id', '')
+            }
 
+            # Send the request to the external API
             response = requests.post(
                 'https://213.199.32.2',
                 headers={
                     'Content-Type': 'application/json',
                     'Authorization': '50jsh291g-636f-4891-b1ed-706e9ad7970f_721bap7nan'
                 },
-                json={'content': formatted_content, 'message_id': data.get('message_id', '')},
+                json=payload,
                 cert=('C:/Users/User/OneDrive/Desktop/ca-certificates/client.crt',
                       'C:/Users/User/OneDrive/Desktop/ca-certificates/client.key'),
                 verify=False
@@ -76,8 +95,9 @@ def send_message_to_external_api(request):
             bot_response = response.json()
 
             if 'response' in bot_response:
-                bot_response['response'] = bot_response['response'].replace('\n', '')
+                bot_response['response'] = bot_response['response'].replace('\\n', '\n').replace('\\\n', '\n').replace('\\\\n', '\n')
 
+                # Create a new chat history entry for the bot response
                 ChatHistory.objects.create(session_key=identifier, message=bot_response['response'], sender='bot')
 
             return JsonResponse(bot_response, status=response.status_code)
@@ -88,8 +108,8 @@ def send_message_to_external_api(request):
     else:
         return JsonResponse({'error': 'This method is not allowed'}, status=405)
 
-def home(request):
 
+def home(request):
     return render(request, "chat/home.html")
 @csrf_exempt
 def submit_feedback(request):
