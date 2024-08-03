@@ -18,7 +18,7 @@ def index(request):
     identifier = request.user.username if request.user.is_authenticated else session_key
     chat_history = ChatHistory.objects.filter(session_key=identifier).order_by('created_at')
 
-    # Exclude the last bot message
+
 
     # Determine sender type
     for chat in chat_history:
