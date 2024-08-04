@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function displayWelcomeMessage() {
-    const messageList = document.getElementById('widget-messages-list');
-    const botMessage = document.createElement('li');
+    const welcomeMessageDiv = document.getElementById('widget-welcome-message');
+    const botMessage = document.createElement('div'); // Changed from 'li' to 'div'
     botMessage.className = 'message bot-message';
 
     const botMessageContent = document.createElement('div');
@@ -83,11 +83,12 @@ function displayWelcomeMessage() {
     botMessageContent.appendChild(botMessageTitle);
     botMessageContent.appendChild(botTextContent);
     botMessage.appendChild(botMessageContent);
-    messageList.appendChild(botMessage);
+    welcomeMessageDiv.appendChild(botMessage); // Append to the new div
 
     const welcomeText = "Здравствуйте! Я Pyxis - искусственный интеллект, созданный командой KRAKEN для оперативной помощи нашим пользователям, покупателям и продавцам. Обращаю ваше внимание, что сейчас я нахожусь на стадии бета-тестирования, обучение - долгий процесс, но с вашей помощью он может пройти быстрее!";
     typeMessage(botTextContent, welcomeText);
 }
+
 
 function typeMessage(element, text, callback) {
     let index = 0;

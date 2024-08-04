@@ -64,20 +64,30 @@ def send_message_to_external_api(request):
 
             # Format the current user message
             formatted_content = data['content'].replace('\\n', '\n').replace('\\\n', '\n').replace('\\\\n', '\n')
-            # history_text += f"USER: {formatted_content}"
+            history_text += f"\n\nUSER: {formatted_content}"
             print("chat history: ", history_text)
-            # Truncate history_text if it exceeds 5000 characters
+            print("length chat history: ", len(history_text))
+
             if len(history_text) > 5000:
-                # Keep the most recent 5000 characters
                 history_text = history_text[-5000:]
+
+            # Находим индекс первого сообщения пользователя
+            first_user_message_index = history_text.find("USER:")
+
+            # Если сообщение пользователя найдено, смещаем историю
+            if first_user_message_index != -1:
+                # Обрезаем историю до первого сообщения пользователя
+                history_text = history_text[first_user_message_index:]
+
             print("truncated chat history: ", history_text)
+            print("length truncated chat history: ", len(history_text))
 
             # Create a new chat history entry for the user message
             ChatHistory.objects.create(session_key=identifier, message=formatted_content, sender = sender)
 
             # Prepare the request payload
             payload = {
-                'content': f"{history_text}USER: {formatted_content}",
+                'content': history_text,
                 'message_id': data.get('message_id', '')
             }
 
