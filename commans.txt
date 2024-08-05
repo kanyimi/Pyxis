@@ -24,3 +24,5 @@ scp -r ubuntu@185.100.87.158:/home/ubuntu/PycharmProjects/chat/static/img /mnt/c
 
 //open nginx configuration
 sudo nano /etc/nginx/sites-available/pyxis
+
+gunicorn --bind 0.0.0.0:8000 Pyxis.wsgi:application --log-level debug

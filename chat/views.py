@@ -71,13 +71,13 @@ def send_message_to_external_api(request):
             if len(history_text) > 5000:
                 history_text = history_text[-5000:]
 
-            # # Находим индекс первого сообщения пользователя
-            # first_user_message_index = history_text.find("USER:")
-            #
-            # # Если сообщение пользователя найдено, смещаем историю
-            # if first_user_message_index != -1:
-            #     # Обрезаем историю до первого сообщения пользователя
-            #     history_text = history_text[first_user_message_index:]
+            # Находим индекс первого сообщения пользователя
+            first_user_message_index = history_text.find("USER:")
+
+            # Если сообщение пользователя найдено, смещаем историю
+            if first_user_message_index != -1:
+                # Обрезаем историю до первого сообщения пользователя
+                history_text = history_text[first_user_message_index:]
 
             print("truncated chat history: ", history_text)
             print("length truncated chat history: ", len(history_text))
