@@ -4,6 +4,20 @@ git reset --hard
 git clean -fd
 git pull origin master
 python manage.py collectstatic --noinput
+//enable Gunicorn:
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+//Create a systemd service file for Gunicorn:
+sudo nano /etc/systemd/system/gunicorn.service
+//Clone your Django project from GitHub
+git clone https://github.com/yourusername/your-repo-name.git
+//open systemctl configuration file:
+///for gunicorn:
+sudo nano /etc/systemd/system/gunicorn.service
+///for nginx:
+sudo nano /etc/systemd/system/nginx.service
+
+
 
 sudo systemctl restart gunicorn
 sudo systemctl restart nginx
@@ -22,7 +36,36 @@ scp /path/to/local/client.key ubuntu@your_server_ip:/path/to/server/client.key
 
 scp -r ubuntu@185.100.87.158:/home/ubuntu/PycharmProjects/chat/static/img /mnt/c/Users/User/Downloads/krn/
 
+//Verify that the socket file path is correct
+ls -l /home/ubuntu/Pyxis/pyxis.sock
+
+//open gunicorn configuration
+ sudo nano /etc/systemd/system/gunicorn.service
 //open nginx configuration
 sudo nano /etc/nginx/sites-available/pyxis
 
-gunicorn --bind 0.0.0.0:8000 Pyxis.wsgi:application --log-level debug
+//Run the following command to check
+ls -l /home/ubuntu/.virtualenvs/Pyxis/bin/gunicorn
+//If the executable does not exist or permissions are not set correctly, correct them
+sudo chmod +x /home/ubuntu/.virtualenvs/Pyxis/bin/gunicorn
+//Verify and Fix Permission
+ls -ld /home/ubuntu/Pyxis
+sudo chmod 755 /home/ubuntu/Pyxis
+sudo chown ubuntu:ubuntu /home/ubuntu/Pyxis
+//Check Nginx Logs
+sudo tail -f /var/log/nginx/error.log
+//Check Gunicorn Logs
+sudo journalctl -u gunicorn
+//Review the Nginx error logs to diagnose
+sudo tail -f /var/log/nginx/error.log
+//Run the Nginx configuration test
+sudo nginx -t
+//Enable Gunicorn to Start on Boot
+sudo systemctl enable gunicorn
+//Stop Apache
+sudo systemctl stop apache2
+//Allow Firewall:
+sudo ufw allow 'Nginx Full'
+//Remove the default Nginx configuration and create a new one
+sudo rm /etc/nginx/sites-enabled/default
+sudo nano /etc/nginx/sites-available/myproject
