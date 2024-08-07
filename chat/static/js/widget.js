@@ -24,14 +24,29 @@ document.addEventListener('DOMContentLoaded', function() {
         sendButton.disabled = messageInput.value.trim() === '';
     });
 
-    messageInput.addEventListener('keypress', function(event) {
+//    messageInput.addEventListener('keypress', function(event) {
+//        if (event.key === 'Enter') {
+//            event.preventDefault();
+//            if (!sendButton.disabled) {
+//                sendWidgetMessage();
+//            }
+//        }
+//    });
+
+    messageInput.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
-            event.preventDefault();
-            if (!sendButton.disabled) {
-                sendWidgetMessage();
+            if (event.shiftKey || event.altKey) {
+
+                return;
+            } else {
+                event.preventDefault();
+                if (!sendButton.disabled) {
+                    sendWidgetMessage();
+                }
             }
         }
     });
+
 
     // Инициализация элементов, связанных с модальным окном
     modal = document.getElementById('feedback-modal');
@@ -60,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function displayWelcomeMessage() {
-    const welcomeMessageDiv = document.getElementById('widget-welcome-message');
-    const botMessage = document.createElement('div'); // Changed from 'li' to 'div'
+    const messageList = document.getElementById('widget-messages-list');
+    const botMessage = document.createElement('li');
     botMessage.className = 'message bot-message';
 
     const botMessageContent = document.createElement('div');
@@ -83,7 +98,7 @@ function displayWelcomeMessage() {
     botMessageContent.appendChild(botMessageTitle);
     botMessageContent.appendChild(botTextContent);
     botMessage.appendChild(botMessageContent);
-    welcomeMessageDiv.appendChild(botMessage); // Append to the new div
+    messageList.prepend(botMessage);
 
     const welcomeText = "Здравствуйте! Я Pyxis - искусственный интеллект, созданный командой KRAKEN для оперативной помощи нашим пользователям, покупателям и продавцам. Обращаю ваше внимание, что сейчас я нахожусь на стадии бета-тестирования, обучение - долгий процесс, но с вашей помощью он может пройти быстрее!";
     typeMessage(botTextContent, welcomeText);
@@ -129,6 +144,46 @@ function typeMessage(element, text, callback) {
     }
 
     type();
+}
+
+// Function to get a cookie by name
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Function to set a cookie
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + (value || "") + ";" + expires + ";path=/";
+}
+
+// Function to generate a UUID (for session ID)
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
+// Check if session ID exists in cookies, if not create one
+let sessionId = getCookie('widget_session_id');
+if (!sessionId) {
+    sessionId = generateUUID();
+    setCookie('widget_session_id', sessionId, 14);  // 14 days expiration
 }
 
 async function sendWidgetMessage() {
@@ -184,7 +239,8 @@ async function sendWidgetMessage() {
             },
             body: JSON.stringify({
                 content: formattedMessage,
-                message_id: 'unique_message_270'
+                message_id: 'unique_message_270',
+                session_id: sessionId
             })
         });
         const data = await response.json();

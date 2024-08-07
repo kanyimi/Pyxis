@@ -11,15 +11,27 @@ document.addEventListener('DOMContentLoaded', function() {
     messageInput.addEventListener('input', function() {
         sendButton.disabled = messageInput.value.trim() === '';
     });
-
-    messageInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
+//
+//    messageInput.addEventListener('keypress', function(event) {
+//        if (event.key === 'Enter') {
+//            event.preventDefault();
+//            if (!sendButton.disabled) {
+//                sendMessage();
+//            }
+//        }
+//    });
+messageInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        if (event.shiftKey || event.altKey) {
+            return;
+        } else {
             event.preventDefault();
             if (!sendButton.disabled) {
                 sendMessage();
             }
         }
-    });
+    }
+});
 
     // Modal window elements initialization
     modal = document.getElementById('feedback-modal');
@@ -117,7 +129,47 @@ function typeMessage(element, text, callback) {
     type();
 }
 
+// Function to get a cookie by name
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
+// Function to set a cookie
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + (value || "") + ";" + expires + ";path=/";
+}
+
+// Function to generate a UUID (for session ID)
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
+// Check if session ID exists in cookies, if not create one
+let sessionId = getCookie('widget_session_id');
+if (!sessionId) {
+    sessionId = generateUUID();
+
+    setCookie('widget_session_id', sessionId, 30);  // 14 days expiration
+}
+console.log('Session ID:', sessionId);
 async function sendMessage() {
     const messageInput = document.getElementById('message-input');
     const messageText = messageInput.value.trim();
@@ -166,7 +218,8 @@ async function sendMessage() {
             },
             body: JSON.stringify({
                 content: formattedMessage,
-                message_id: 'unique_message_270'
+                message_id: 'unique_message_270',
+                session_id: sessionId
             })
         });
         const data = await response.json();

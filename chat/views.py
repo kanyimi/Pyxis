@@ -46,9 +46,14 @@ def send_message_to_external_api(request):
                 identifier = request.user.username
                 sender = "user"
             else:
-                if not request.session.session_key:
-                    request.session.create()
-                identifier = request.session.session_key
+                session_id = data.get("session_id")
+                if session_id:
+                    print("session ID: ", session_id)
+                    identifier = session_id
+                else:
+                    if not request.session.session_key:
+                        request.session.create()
+                    identifier = request.session.session_key
                 sender = 'user'
 
             # Retrieve chat history for the identifier

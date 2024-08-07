@@ -255,6 +255,7 @@ body {
     color: #ffffff;
     box-sizing: border-box;
     outline: none;
+    resize:none;
 }
 .message {
     display: flex;
