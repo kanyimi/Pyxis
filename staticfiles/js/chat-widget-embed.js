@@ -4,8 +4,8 @@
     container.style.position = 'fixed';
     container.style.bottom = '20px';
     container.style.right = '20px';
-    container.style.width = '450px';
-    container.style.height = '500px';
+    container.style.width = '60px';
+    container.style.height = '60px';
     container.style.zIndex = '1000';
     container.style.overflow = 'hidden';
     container.style.background = 'transparent';
