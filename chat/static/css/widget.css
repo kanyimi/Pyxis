@@ -8,6 +8,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
+
 .chat-container {
     position: fixed;
     bottom: 20px;
@@ -62,6 +63,7 @@
     z-index: 1000;
     background-color: white;
     color: #ffffff;
+
 }
 
 .open-widget-btn.dark-theme {

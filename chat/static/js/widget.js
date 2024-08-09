@@ -13,11 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
     openWidgetButton.addEventListener('click', function() {
         supportWidget.style.display = 'flex';
         openWidgetButton.style.display = 'none';
+        sendResizeToParent(440, 468);
     });
 
     closeWidgetButton.addEventListener('click', function() {
         supportWidget.style.display = 'none';
         openWidgetButton.style.display = 'block';
+        sendResizeToParent(80, 80);
     });
 
     messageInput.addEventListener('input', function() {
@@ -73,6 +75,10 @@ document.addEventListener('DOMContentLoaded', function() {
         submitFeedback(botMessageContent, feedbackContent, 'negative');
     });
 });
+
+function sendResizeToParent(width, height) {
+    window.parent.postMessage({ action: 'resize', width: width, height: height }, '*');
+}
 
 function displayWelcomeMessage() {
     const messageList = document.getElementById('widget-messages-list');
