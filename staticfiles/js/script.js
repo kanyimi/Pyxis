@@ -129,11 +129,9 @@ function typeMessage(element, text, callback) {
     type();
 }
 
-
 async function sendMessage() {
     const messageInput = document.getElementById('message-input');
     const messageText = messageInput.value.trim();
-
     if (messageText === '') return;
 
     messageInput.value = '';
@@ -167,6 +165,11 @@ async function sendMessage() {
 
     messageList.scrollTop = messageList.scrollHeight;
 
+    // Setting up the timeout for the fetch request
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const timeoutId = setTimeout(() => controller.abort(), 180000);  // 180 seconds (3 minutes)
+
     try {
         const formattedMessage = `${messageText.replace(/\n/g, '')}`;
 
@@ -179,8 +182,12 @@ async function sendMessage() {
             body: JSON.stringify({
                 content: formattedMessage,
                 message_id: 'unique_message_270',
-            })
+            }),
+            signal: signal // Ensure this is correctly set
         });
+
+        clearTimeout(timeoutId);  // Clear the timeout if the request completes in time
+
         const data = await response.json();
 
         typingIndicator.remove();
@@ -198,7 +205,6 @@ async function sendMessage() {
 
             const botMessageTitle = document.createElement('span');
             botMessageTitle.innerHTML = `Pyxis: ${data.response.replace(/\n/g, '<br>')}`;
-
 
             const botMessageContent = document.createElement('div');
             botMessageContent.className = 'message-content';
@@ -226,7 +232,7 @@ async function sendMessage() {
             botMessage.appendChild(feedbackButtons);
 
             messageList.scrollTop = messageList.scrollHeight;
-//            typeMessage(botMessageContent, data.response);
+
             // Add event listeners for feedback buttons
             goodButton.addEventListener('click', function() {
                 if (goodButton.dataset.submitted === 'true') return;
@@ -244,7 +250,11 @@ async function sendMessage() {
             });
         }
     } catch (error) {
-        console.error('Error:', error);
+        if (error.name === 'AbortError') {
+            console.error('Fetch request timed out');
+        } else {
+            console.error('Error:', error);
+        }
         alert('Произошла ошибка при запросе. Пожалуйста, проверьте консоль для получения дополнительной информации.');
         typingIndicator.remove();
     }

@@ -26,14 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sendButton.disabled = messageInput.value.trim() === '';
     });
 
-//    messageInput.addEventListener('keypress', function(event) {
-//        if (event.key === 'Enter') {
-//            event.preventDefault();
-//            if (!sendButton.disabled) {
-//                sendWidgetMessage();
-//            }
-//        }
-//    });
+
 
     messageInput.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
@@ -192,6 +185,7 @@ if (!sessionId) {
     setCookie('widget_session_id', sessionId, 14);  // 14 days expiration
 }
 
+
 async function sendWidgetMessage() {
     const messageInput = document.getElementById('widget-message-input');
     const messageText = messageInput.value.trim();
@@ -232,7 +226,12 @@ async function sendWidgetMessage() {
     typingIndicator.className = 'message typing-indicator';
     messageList.appendChild(typingIndicator);
 
-     messageList.scrollTop = messageList.scrollHeight;
+    messageList.scrollTop = messageList.scrollHeight;
+
+    // Setting up the timeout for the fetch request
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const timeoutId = setTimeout(() => controller.abort(), 180000);  // 180 seconds (3 minutes)
 
     try {
         const formattedMessage = `${messageText.replace(/\n/g, '')}`;
@@ -247,8 +246,16 @@ async function sendWidgetMessage() {
                 content: formattedMessage,
                 message_id: 'unique_message_270',
                 session_id: sessionId
-            })
+            }),
+            signal: signal // Ensure this is correctly set
         });
+
+        clearTimeout(timeoutId);  // Clear the timeout if the request completes in time
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
         const data = await response.json();
 
         typingIndicator.remove();
@@ -278,7 +285,10 @@ async function sendWidgetMessage() {
             botMessage.appendChild(botMessageContent);
             messageList.appendChild(botMessage);
 
-            // Добавление кнопок "палец вверх" и "палец вниз"
+            messageList.scrollTop = messageList.scrollHeight;
+
+            typeMessage(botTextContent, data.response);
+
             const feedbackButtons = document.createElement('div');
             feedbackButtons.className = 'feedback-buttons';
 
@@ -294,11 +304,6 @@ async function sendWidgetMessage() {
             feedbackButtons.appendChild(badButton);
             botMessage.appendChild(feedbackButtons);
 
-             messageList.scrollTop = messageList.scrollHeight;
-
-            typeMessage(botTextContent, data.response);
-
-            // Обработчики событий для кнопок обратной связи
             goodButton.addEventListener('click', function() {
                 if (goodButton.dataset.submitted === 'true') return;
                 goodButton.style.color = '#000000';
@@ -315,7 +320,11 @@ async function sendWidgetMessage() {
             });
         }
     } catch (error) {
-        console.error('Error:', error);
+        if (error.name === 'AbortError') {
+            console.error('Fetch request timed out');
+        } else {
+            console.error('Fetch request failed:', error);
+        }
         alert('Произошла ошибка при запросе. Пожалуйста, проверьте консоль для получения дополнительной информации.');
         typingIndicator.remove();
     }

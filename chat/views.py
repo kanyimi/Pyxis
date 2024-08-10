@@ -106,7 +106,8 @@ def send_message_to_external_api(request):
                 json=payload,
                 cert=('C:/Users/User/OneDrive/Desktop/ca-certificates/client.crt',
                       'C:/Users/User/OneDrive/Desktop/ca-certificates/client.key'),
-                verify=False
+                verify=False,
+                timeout=180
             )
 
             bot_response = response.json()
