@@ -17,7 +17,7 @@ AUTH_USER_MODEL = 'chat.account'
 # DEBUG = True
 # ALLOWED_HOSTS = ["*"]
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '185.100.87.158,localhost,kpyx.co,www.kpyx.co,kpyx.io,www.kpyx.io,www.krmp.io,krmp.io,localhost,2krk.site,').split(',')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '185.100.87.158,localhost,kpyx.co,www.kpyx.co,kpyx.io,www.kpyx.io,www.krmp.io,krmp.io,localhost,2krk.site').split(',')
 
 # Добавьте CSRF_TRUSTED_ORIGINS
 CSRF_TRUSTED_ORIGINS = [
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'Pyxis',
     'chat',
+    "admin_honeypot",
 ]
 
 MIDDLEWARE = [

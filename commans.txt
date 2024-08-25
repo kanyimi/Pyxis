@@ -69,3 +69,6 @@ sudo ufw allow 'Nginx Full'
 //Remove the default Nginx configuration and create a new one
 sudo rm /etc/nginx/sites-enabled/default
 sudo nano /etc/nginx/sites-available/myproject
+
+
+/home/ubuntu/Pyxis/venv/bin/gunicorn
