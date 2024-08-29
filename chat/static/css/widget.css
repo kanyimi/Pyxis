@@ -68,7 +68,7 @@
 
 }
 @keyframes blink-animation {
-    0%, 100% {
+    0%, 80% {
         box-shadow: 0 0 15px 5px rgb(0, 0, 0);
     }
     50% {
