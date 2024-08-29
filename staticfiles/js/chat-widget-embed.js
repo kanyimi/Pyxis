@@ -13,6 +13,7 @@
 
     iframe.style.zIndex = '1000';
     iframe.style.transition = 'width 0.3s ease, height 0.3s ease';
+    iframe.style.borderRadius = '50%';
 
     // Set the iframe source to the provided URL
     iframe.src = 'https://kpyx.co/home';
