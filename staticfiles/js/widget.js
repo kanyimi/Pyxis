@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     closeWidgetButton.addEventListener('click', function() {
         supportWidget.style.display = 'none';
         openWidgetButton.style.display = 'block';
-        sendResizeToParent(80, 80);
+        sendResizeToParent(85, 85);
     });
 
     messageInput.addEventListener('input', function() {

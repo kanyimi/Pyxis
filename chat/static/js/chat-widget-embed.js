@@ -7,8 +7,8 @@
     iframe.style.position = 'fixed';
     iframe.style.bottom = '20px';
     iframe.style.right = '20px';
-    iframe.style.width = '80px';
-    iframe.style.height = '80px';
+    iframe.style.width = '85px';
+    iframe.style.height = '85px';
     iframe.style.border = 'none';
 
     iframe.style.zIndex = '1000';
