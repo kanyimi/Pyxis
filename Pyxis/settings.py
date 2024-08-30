@@ -10,8 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
 
-
 DEBUG = False
+
 AUTH_USER_MODEL = 'chat.account'
 
 
@@ -115,7 +115,7 @@ DATABASES = {
     }
 }
 
-
+X_FRAME_OPTIONS='ALLOWALL'
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
