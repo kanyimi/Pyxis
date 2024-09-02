@@ -28,6 +28,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.krmp.io",
     "https://krmp.io",
     "https://localhost",
+    "https://portfolio-gzbf.onrender.com"
 ]
 
 # Добавьте CSRF_TRUSTED_ORIGINS
@@ -75,6 +76,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost",
     "https://2krk.site",
     "https://kpyx.io",
+    "https://portfolio-gzbf.onrender.com",
 ]
 
 CORS_ORIGIN_WHITELIST = [
