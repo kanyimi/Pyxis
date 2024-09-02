@@ -1,4 +1,10 @@
 (function() {
+    // Manually add the stylesheet(s) used by the widget
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://kpyx.co//static/css/widget.css'; // Replace with actual stylesheet URL
+    document.head.appendChild(link);
+
     // Fetch content from the API
     fetch('https://kpyx.co/home')
         .then(response => response.text())
@@ -6,18 +12,6 @@
             // Parse the fetched HTML content
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlContent, 'text/html');
-
-            // Extract and append stylesheets to the head
-            const stylesheets = doc.querySelectorAll('link[rel="stylesheet"]');
-            stylesheets.forEach(stylesheet => {
-                document.head.appendChild(stylesheet.cloneNode(true));
-            });
-
-            // Extract and append inline styles to the head
-            const inlineStyles = doc.querySelectorAll('style');
-            inlineStyles.forEach(style => {
-                document.head.appendChild(style.cloneNode(true));
-            });
 
             // Append the parsed content directly to the body (or another target element)
             while (doc.body.firstChild) {
