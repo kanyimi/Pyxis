@@ -40,7 +40,7 @@
         })
         .then(() => {
             // Load external JavaScript file after DOM has been modified and is ready
-            return loadExternalJS('https://kpyx.co/static/js/try1.js');
+            return loadExternalJS('https://kpyx.co/static/js/widget.js');
         })
         .then(() => {
             console.log('JavaScript file loaded and executed successfully.');
