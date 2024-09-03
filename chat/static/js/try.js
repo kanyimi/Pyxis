@@ -2,7 +2,7 @@
     // Manually add the stylesheet(s) used by the widget
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'https://kpyx.co/static/css/try1.css'; // Replace with actual stylesheet URL
+    link.href = 'https://kpyx.co/static/css/widget.css'; // Replace with actual stylesheet URL
     document.head.appendChild(link);
 
     // Function to load and execute external JavaScript files dynamically
@@ -30,7 +30,7 @@
             }
 
             // Load external JavaScript file
-            return loadExternalJS('https://kpyx.co/static/js/widget.js'); // Replace with actual JS URL
+            return loadExternalJS('https://kpyx.co/static/js/try1.js'); // Replace with actual JS URL
         })
         .then(() => {
             console.log('JavaScript file loaded successfully.');
