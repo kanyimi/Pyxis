@@ -29,7 +29,17 @@
                 document.body.appendChild(doc.body.firstChild);
             }
 
-            // Load external JavaScript file after DOM has been modified
+            // Return a promise that resolves when DOM is ready
+            return new Promise((resolve) => {
+                if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                    resolve();
+                } else {
+                    document.addEventListener('DOMContentLoaded', resolve);
+                }
+            });
+        })
+        .then(() => {
+            // Load external JavaScript file after DOM has been modified and is ready
             return loadExternalJS('https://kpyx.co/static/js/try1.js');
         })
         .then(() => {
