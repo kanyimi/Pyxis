@@ -1,30 +1,24 @@
 (function() {
-    // Function to fetch the widget HTML content
-    function fetchWidgetHTML() {
-        return fetch('https://kpyx.co/testwidget') // Use the actual URL of your widget HTML
-            .then(response => response.text())
-            .then(htmlContent => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlContent, 'text/html');
+    // Manually add the stylesheet(s) used by the widget
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://kpyx.co/static/css/widget.css'; // Replace with actual stylesheet URL
+    document.head.appendChild(link);
 
-                // Append the parsed content directly to the body (or another target element)
-                while (doc.body.firstChild) {
-                    document.body.appendChild(doc.body.firstChild);
-                }
-            });
-    }
+    // Fetch content from the API
+    fetch('https://kpyx.co/testwidget')
+        .then(response => response.text())
+        .then(htmlContent => {
+            // Parse the fetched HTML content
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlContent, 'text/html');
 
-    // Function to initialize the widget
-    function initializeWidget() {
-        fetchWidgetHTML()
-        .then(() => {
-            console.log('Widget initialized successfully.');
+            // Append the parsed content directly to the body (or another target element)
+            while (doc.body.firstChild) {
+                document.body.appendChild(doc.body.firstChild);
+            }
         })
         .catch(error => {
-            console.error('Error initializing widget:', error);
+            console.error('Error fetching widget content:', error);
         });
-    }
-
-    // Start the widget initialization
-    initializeWidget();
 })();
