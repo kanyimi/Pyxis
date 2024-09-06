@@ -53,3 +53,14 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"Feedback {self.id} - {self.feedback_type} - {self.created_at}"
+
+
+from django.utils import timezone
+
+class APICallCount(models.Model):
+    function_name = models.CharField(max_length=255)  # Name of the function being tracked
+    count = models.IntegerField(default=0)           # Count of how many times the function is called
+    last_called = models.DateTimeField(auto_now=True) # Timestamp of the last function call
+
+    def __str__(self):
+        return f"{self.function_name}: {self.count} calls"

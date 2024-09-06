@@ -29,6 +29,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://krmp.io",
     "https://localhost",
     "https://portfolio-gzbf.onrender.com"
+
 ]
 
 # Добавьте CSRF_TRUSTED_ORIGINS
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "chat.middleware.ContentSecurityPolicyMiddleware"
 ]
 
 CORS_ORIGIN_ALLOW_ALL = False
@@ -77,6 +79,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://2krk.site",
     "https://kpyx.io",
     "https://portfolio-gzbf.onrender.com",
+
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -107,8 +110,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Pyxis.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
+
+
 
 DATABASES = {
     'default': {
@@ -117,9 +121,8 @@ DATABASES = {
     }
 }
 
-X_FRAME_OPTIONS='ALLOWALL'
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+# X_FRAME_OPTIONS='ALLOWALL'
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

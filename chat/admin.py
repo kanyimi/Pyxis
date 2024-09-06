@@ -1,9 +1,17 @@
+
+from .models import Feedback, ChatHistory, account, APICallCount
 from django.contrib import admin
 
-# Register your models here.
-# chat/admin.py
-from django.contrib import admin
-from .models import Feedback, ChatHistory, account
+
+
+
+class APICallCountAdmin(admin.ModelAdmin):
+    list_display = ('function_name', 'count', 'last_called')
+    list_filter = ('last_called',)  # Enables filtering by the `last_called` field (time)
+
+admin.site.register(APICallCount, APICallCountAdmin)
+
+
 
 admin.site.register(Feedback)
 admin.site.register(ChatHistory)

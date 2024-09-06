@@ -332,7 +332,7 @@ async function sendWidgetMessage() {
 
 
 function submitFeedback(botMessage, feedback, type) {
-    fetch('https://kpyx.co/api/submit_feedback', {
+    fetch('/api/submit_feedback/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -355,7 +355,7 @@ function submitFeedback(botMessage, feedback, type) {
 
 async function submitFeedback(botMessageContent, feedbackContent, feedbackType) {
     try {
-        const response = await fetch('https://kpyx.co/api/submit_feedback/', {
+        const response = await fetch('/api/submit_feedback/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

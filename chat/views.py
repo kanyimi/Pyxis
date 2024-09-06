@@ -3,12 +3,12 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
-from .models import Feedback, ChatHistory
+from .models import Feedback, ChatHistory, APICallCount
 from .forms import UserRegistrationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-
+from django.utils import timezone
 
 
 def index(request):
@@ -39,6 +39,13 @@ def index(request):
 def send_message_to_external_api(request):
     if request.method == 'POST':
         try:
+            # Increment call count
+            call_count, created = APICallCount.objects.get_or_create(function_name='send_message_to_external_api')
+            call_count.count += 1
+            call_count.last_called = timezone.now()
+            call_count.save()
+
+            is_widget_request = request.headers.get('X-Widget-Request', False)
             data = json.loads(request.body)
 
             # Determine user identifier and sender
