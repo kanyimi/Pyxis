@@ -20,7 +20,7 @@ class ContentSecurityPolicyMiddleware:
             "https://krmp.io",
             # "https://localhost",
             "https://2krk.site",
-            # "https://portfolio-gzbf.onrender.com",
+            "https://portfolio-gzbf.onrender.com",
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header
