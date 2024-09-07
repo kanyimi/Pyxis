@@ -21,6 +21,7 @@ class ContentSecurityPolicyMiddleware:
             # "https://localhost",
             "https://2krk.site",
             "https://portfolio-gzbf.onrender.com",
+            "https://dkm.ac"
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header
