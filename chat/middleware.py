@@ -12,14 +12,12 @@ class ContentSecurityPolicyMiddleware:
             "https://kpyx.co",
             "https://www.kpyx.co",
             "https://185.100.87.158:8000",
-
             "https://kpyx.io",
             "https://www.kpyx.io",
             "https://www.krmp.io",
             "https://krmp.io",
             "https://2krk.site",
             "https://portfolio-gzbf.onrender.com",
-            "https://dkm.ac"
             "https://krm.gg",
             "https://knm.st",
             "https://2kkm.co",
@@ -53,7 +51,8 @@ class ContentSecurityPolicyMiddleware:
             "https://KNMP.IO",
             "https://KNMP.ST",
             "https://zerkalo-kra.cc",
-            "https://zerkalokrn.cc"
+            "https://zerkalokrn.cc",
+            "https://dkm.ac"
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header

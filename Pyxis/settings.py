@@ -79,6 +79,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://2krk.site",
     "https://kpyx.io",
     "https://portfolio-gzbf.onrender.com",
+    "https://dkm.ac"
 
 ]
 
