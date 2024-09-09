@@ -53,10 +53,10 @@ class ContentSecurityPolicyMiddleware:
             "https://zerkalo-kra.cc",
             "https://zerkalokrn.cc",
             "https://dkm.ac",
-            "kr2.ai",
-            "kr2.me",
-            "kr2.is",
-            "km2.is"
+            "https://kr2.ai",
+            "https://kr2.me",
+            "https://kr2.is",
+            "https://km2.is"
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header
