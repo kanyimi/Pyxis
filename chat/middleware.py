@@ -59,6 +59,7 @@ class ContentSecurityPolicyMiddleware:
             "https://km2.is",
             "https://4kra.co",
             "https://2kn.is",
+            "https://4kr.co"
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header
