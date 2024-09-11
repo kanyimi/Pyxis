@@ -69,10 +69,13 @@
 }
 @keyframes blink-animation {
     0%, 100% {
-        box-shadow: 0 0 13px 4px rgb(0, 0, 0);
+        box-shadow: 0 0 13px 4px rgb(135, 206, 235);
+    }
+    25% {
+        box-shadow:  0 0 14px rgb(123, 199, 77);
     }
     50% {
-        box-shadow: none;
+        box-shadow: red 0 0 14px;
     }
 }
 
