@@ -67,7 +67,7 @@ class ContentSecurityPolicyMiddleware:
         # Generate the frame-ancestors directive for the Content-Security-Policy header
         frame_ancestors = ' '.join(allowed_domains)
 
-        # Set the Content-Security-Policy header
+
         response['Content-Security-Policy'] = f"frame-ancestors {frame_ancestors}"
 
         return response
