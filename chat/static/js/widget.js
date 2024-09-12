@@ -11,9 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const supportWidget = document.getElementById('support-widget');
 
     openWidgetButton.addEventListener('click', function() {
-        supportWidget.style.display = 'flex';
-        openWidgetButton.style.display = 'none';
-        sendResizeToParent(440, 468);
+//        supportWidget.style.display = 'flex';
+//        openWidgetButton.style.display = 'none';
+//        sendResizeToParent(440, 468);
+          window.location.href = "https://t.me/PyxisK_bot";
     });
 
     closeWidgetButton.addEventListener('click', function() {
