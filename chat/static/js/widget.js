@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //        supportWidget.style.display = 'flex';
 //        openWidgetButton.style.display = 'none';
 //        sendResizeToParent(440, 468);
-          window.location.href = "https://t.me/PyxisK_bot";
+          window.open("https://t.me/PyxisK_bot", "_blank");
     });
 
     closeWidgetButton.addEventListener('click', function() {
