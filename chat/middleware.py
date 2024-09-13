@@ -62,6 +62,8 @@ class ContentSecurityPolicyMiddleware:
             "https://4kr.co",
             "https://t.me",
             "https://web.telegram.org",
+            "https://cyberrpg.gg",
+            "https://cyberika.gg",
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header
