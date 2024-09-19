@@ -28,7 +28,9 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.krmp.io",
     "https://krmp.io",
     "https://localhost",
-    "https://portfolio-gzbf.onrender.com"
+    "https://portfolio-gzbf.onrender.com",
+    "https://install.kkrn.co",
+    "https://krn.is",
 
 ]
 
@@ -82,7 +84,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://2krk.site",
     "https://kpyx.io",
     "https://portfolio-gzbf.onrender.com",
-    "https://dkm.ac"
+    "https://dkm.ac",
+    "http://127.0.0.1:5500",
+    "https://krn.is",
+    "https://install.kkrn.co"
 
 ]
 

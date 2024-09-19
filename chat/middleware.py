@@ -48,8 +48,7 @@ class ContentSecurityPolicyMiddleware:
             "https://2kk.sh",
             "https://2kk.so",
             "https://knmp.cc",
-            "https://KNMP.IO",
-            "https://KNMP.ST",
+            "https://knmp.st",
             "https://zerkalo-kra.cc",
             "https://zerkalokrn.cc",
             "https://dkm.ac",
@@ -64,6 +63,9 @@ class ContentSecurityPolicyMiddleware:
             "https://web.telegram.org",
             "https://cyberrpg.gg",
             "https://cyberika.gg",
+            "https://knmp.io",
+            "https://krn.is",
+            "https://install.kkrn.co"
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header
