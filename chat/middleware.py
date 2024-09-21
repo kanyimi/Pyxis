@@ -65,7 +65,8 @@ class ContentSecurityPolicyMiddleware:
             "https://cyberika.gg",
             "https://knmp.io",
             "https://krn.is",
-            "https://install.kkrn.co"
+            "https://install.kkrn.co",
+            "https://cybercity.gg"
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header
