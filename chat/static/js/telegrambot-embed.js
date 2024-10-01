@@ -1,6 +1,6 @@
 
 (function() {
-    // Create the iframe element
+
     var iframe = document.createElement('iframe');
 
 
