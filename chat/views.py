@@ -192,5 +192,5 @@ def logout_view(request):
     messages.info(request, "You have successfully logged out.")
     return redirect('login')
 
-def testwidget(request):
-    return render(request, "chat/testwidget.html")
+def telegrambot(request):
+    return render(request, "chat/telegrambot.html")

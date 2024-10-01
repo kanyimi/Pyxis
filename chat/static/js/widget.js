@@ -11,10 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const supportWidget = document.getElementById('support-widget');
 
     openWidgetButton.addEventListener('click', function() {
-//        supportWidget.style.display = 'flex';
-//        openWidgetButton.style.display = 'none';
-//        sendResizeToParent(440, 468);
-          window.open("https://t.me/PyxisK_bot", "_blank");
+        supportWidget.style.display = 'flex';
+        openWidgetButton.style.display = 'none';
+        sendResizeToParent(440, 468);
     });
 
     closeWidgetButton.addEventListener('click', function() {
