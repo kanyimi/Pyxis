@@ -71,7 +71,8 @@ class ContentSecurityPolicyMiddleware:
             "https://cybertown.gg",
             "https://3km.ac",
             "https://3km.so",
-            "https://3km.gg"
+            "https://3km.gg",
+            "https://kn1.ac"
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header
