@@ -73,12 +73,17 @@ class ContentSecurityPolicyMiddleware:
             "https://3km.so",
             "https://3km.gg",
             "https://kn1.ac",
-            "http://kn2.cx"
+            "http://kn2.cx",
             "http://1kn.ac",
             "https://1kn.ac",
             "https://kn2.cx",
             "https://ddna.top",
-            "https://kr2.nl"
+            "https://kr2.nl",
+            "https://kuzbass.pro",
+            "https://mafiacity.gg",
+            "https://kuzbass.gg"
+
+
         ]
 
         # Generate the frame-ancestors directive for the Content-Security-Policy header
