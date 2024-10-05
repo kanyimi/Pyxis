@@ -81,7 +81,8 @@ class ContentSecurityPolicyMiddleware:
             "https://kuzbass.pro",
             "https://mafiacity.gg",
             "https://kuzbass.gg",
-            "https://2kra.tv"
+            "https://2kra.tv",
+            "https://3km.me"
 
 
         ]
