@@ -83,7 +83,9 @@ class ContentSecurityPolicyMiddleware:
             "https://kuzbass.gg",
             "https://2kra.tv",
             "https://3km.me",
-            "https://1kn.ac"
+            "https://1kn.ac",
+            "https://1kdm.cc",
+            "https://1kdm.me"
 
 
         ]
