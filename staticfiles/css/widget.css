@@ -63,8 +63,9 @@
     z-index: 1000;
     background-color: white;
     color: #ffffff;
-    animation: blink-animation 5s infinite;
+    /*animation: blink-animation 5s infinite;*/
     animation-delay: 9s;
+    transition: transform 0.5s ease;
 
 }
 @keyframes blink-animation {
@@ -89,7 +90,7 @@
     }
 }
 .open-widget-btn:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: rotate(360deg);
 }
 .messages-list {
     list-style: none;
