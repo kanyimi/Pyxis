@@ -86,7 +86,8 @@ class ContentSecurityPolicyMiddleware:
             "https://1kn.ac",
             "https://1kdm.cc",
             "https://1kdm.me",
-            "https://kn3.me"
+            "https://kn3.me",
+            "https://3km.nl"
 
 
         ]
