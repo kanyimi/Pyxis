@@ -167,7 +167,7 @@ class ContentSecurityPolicyMiddleware:
             "https://y04nvgbaan91fcs7y43d.com",
             "https://ee4skxn2376ml4z4milk.io",
             "https://ik6ertr168yxyac8bd81.net",
-            "https://portfolio-gzbf.onrender.com",
+            # "https://portfolio-gzbf.onrender.com",
             "https://krm.gg",
             "https://ejymbev9jdn9p9ay1n9j.info",
             "https://22drb3gz7ixcfupikvz9.co",
