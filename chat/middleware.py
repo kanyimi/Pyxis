@@ -17,7 +17,7 @@ class ContentSecurityPolicyMiddleware:
             "https://www.krmp.io",
             "https://krmp.io",
             "https://2krk.site",
-            # "https://portfolio-gzbf.onrender.com",
+            "https://portfolio-gzbf.onrender.com",
             "https://krm.gg",
             "https://knm.st",
             "https://2kkm.co",
