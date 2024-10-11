@@ -17,7 +17,7 @@ class ContentSecurityPolicyMiddleware:
             "https://www.krmp.io",
             "https://krmp.io",
             "https://2krk.site",
-            "https://portfolio-gzbf.onrender.com",
+            # "https://portfolio-gzbf.onrender.com",
             "https://krm.gg",
             "https://knm.st",
             "https://2kkm.co",
@@ -96,6 +96,6 @@ class ContentSecurityPolicyMiddleware:
         frame_ancestors = ' '.join(allowed_domains)
 
 
-        response['Content-Security-Policy'] = f"frame-ancestors "
+        response['Content-Security-Policy'] = f"frame-ancestors {frame_ancestors}"
 
         return response
