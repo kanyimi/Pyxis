@@ -96,6 +96,6 @@ class ContentSecurityPolicyMiddleware:
         frame_ancestors = ' '.join(allowed_domains)
 
 
-        response['Content-Security-Policy'] = f"frame-ancestors {frame_ancestors}; report-uri /csp-violation-report-endpoint/"
+        response['Content-Security-Policy'] = f"frame-ancestors "
 
         return response
