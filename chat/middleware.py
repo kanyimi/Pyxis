@@ -88,7 +88,8 @@ class ContentSecurityPolicyMiddleware:
             "https://1kdm.me",
             "https://kn3.me",
             "https://3km.nl",
-            "https://kr-adresa.cc"
+            "https://kr-adresa.cc",
+            "https://mycyber.gg"
 
 
         ]
