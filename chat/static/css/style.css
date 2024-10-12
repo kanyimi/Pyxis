@@ -376,6 +376,26 @@ button:hover {
 .header-left .logo {
     height: 100px; /* Установите нужную высоту логотипа */
 }
+/* For tablets (between 768px and 1024px width) */
+@media (max-width: 1024px) {
+    .header-left .logo {
+        height: 80px;
+    }
+}
+
+/* For small tablets and large phones (between 600px and 768px width) */
+@media (max-width: 768px) {
+    .header-left .logo {
+        height: 60px;
+    }
+}
+
+/* For phones (less than 600px width) */
+@media (max-width: 600px) {
+    .header-left .logo {
+        height: 40px;
+    }
+}
 .logo-name {
     width: 20%; /* Adjust the size relative to the viewport */
     height: auto; /* Maintain aspect ratio */
@@ -387,8 +407,8 @@ button:hover {
 /* Extra responsiveness for very small devices (like phones) */
 @media (max-width: 480px) {
     .logo-name {
-        width: 50%; /* Increase size for mobile devices */
-        max-width: 60px;
+        width: 80%; /* Increase size for mobile devices */
+        max-width: 80px;
     }
 }
 
