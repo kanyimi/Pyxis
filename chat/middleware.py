@@ -192,6 +192,7 @@ class ContentSecurityPolicyMiddleware:
             "https://6j8yz6e1s825pfo42bf2.org",
             "https://1tkk4t0ijqxhtffkx9lx.org",
             "https://v8q1ou6qdpfd3902v6sf.gg",
+            "https://2krm.in",
             "https://ysn7ogamqj34iotqwyr8.net",
             "https://2i0pfyp2hh40bolj2pcq.ai",
             "https://622dh0bgs0x79fey86qj.co",
