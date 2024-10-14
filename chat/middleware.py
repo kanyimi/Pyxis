@@ -201,6 +201,7 @@ class ContentSecurityPolicyMiddleware:
             "https://zh125x6u2hc0rbhqw0dz.info",
             "https://dwasxrl00a08txjtluuh.info",
             "https://fif5lqc69qwtsvf08o68.net",
+            "https://mkn.so",
             "https://asc9gveu5t4f0483b53l.io",
             "https://2g9p4zoxyrrn12s4mxq2.co",
             "https://1m71q8k1cmxmjcbg4lc6.gg",
