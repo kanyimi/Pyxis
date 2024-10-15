@@ -389,6 +389,7 @@ class ContentSecurityPolicyMiddleware:
             "https://1kn.ac",
             "https://bafybeicnih7nzmjvf4yes5mtivlemfgxgiuzpg6gtpvutnjat5rrjntv4u.ipfs.dweb.link",
             "https://1kdm.cc",
+            "https://bafybeielcbdkjl37lb32omhjlmnjft4e4fdxzla4j2cqyhmptck3aygfra.ipfs.dweb.link",
             "https://1kdm.me",
             "https://kn3.me",
             "https://3km.nl",
