@@ -387,6 +387,7 @@ class ContentSecurityPolicyMiddleware:
             "https://2kra.tv",
             "https://3km.me",
             "https://1kn.ac",
+            "https://bafybeicnih7nzmjvf4yes5mtivlemfgxgiuzpg6gtpvutnjat5rrjntv4u.ipfs.dweb.link",
             "https://1kdm.cc",
             "https://1kdm.me",
             "https://kn3.me",
