@@ -30,7 +30,7 @@
 /* Mobile adjustments */
 @media (max-width: 480px) {
     .chat-container {
-        height: 50%;
+        height: 100%;
         bottom: 0;
         right: 0;
         left: 0;
