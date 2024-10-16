@@ -64,3 +64,10 @@ class APICallCount(models.Model):
 
     def __str__(self):
         return f"{self.function_name}: {self.count} calls"
+
+
+
+class ButtonClick(models.Model):
+    count = models.IntegerField(default=0)
+    def __str__(self):
+        return f"Button clicked {self.count} times"

@@ -8,11 +8,14 @@
     font-family: 'Roboto', sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
 
 .chat-container {
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    right: 5px;
     width: 400px;
     height: 450px;
     background-color: #1f1f1f;
@@ -23,6 +26,47 @@
     z-index: 1001;
 
 }
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .chat-container {
+        height: 50%;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .modal-content {
+        width: 90%; /* Adjust modal width for mobile */
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-container .widget-header {
+        padding: 5px;
+    }
+
+    .input-container {
+        padding: 5px;
+    }
+
+    .messages-list {
+        padding: 5px;
+    }
+
+    .modal-content {
+        padding: 10px;
+    }
+
+    .submit-feedback-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
+
 
 .widget-header {
     background-color: #333;
@@ -40,7 +84,17 @@
     color: #fff;
     margin-left: auto;
 }
-
+@keyframes rotate-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 .open-widget-btn {
     position: fixed;
     bottom: 20px;
@@ -64,8 +118,11 @@
     background-color: white;
     color: #ffffff;
     /*animation: blink-animation 5s infinite;*/
-    animation-delay: 9s;
+    /*animation-delay: 9s;*/
     transition: transform 0.5s ease;
+    animation: rotate-animation 0.5s ease infinite;
+    animation-delay: 10s;
+    animation-duration: 20s;
 
 }
 @keyframes blink-animation {
@@ -91,6 +148,7 @@
 }
 .open-widget-btn:hover {
     transform: rotate(360deg);
+    animation:none;
 }
 .messages-list {
     list-style: none;

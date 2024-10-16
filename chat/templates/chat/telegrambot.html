@@ -21,7 +21,7 @@
             <button id="widget-send-button" onclick="sendWidgetMessage()" disabled><i class="fa fa-paper-plane"></i></button>
         </div>
     </div>
-    <button id="open-widget-btn" class="open-widget-btn">+</button>
+    <button id="open-widget-btn" class="open-widget-btn" data-url="{% url 'increment_count' %}">+</button>
     <div id="feedback-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>

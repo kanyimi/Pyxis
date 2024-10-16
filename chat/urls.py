@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, home, send_message_to_external_api, submit_feedback, register, login_view, logout_view, telegrambot
+from .views import index, home, send_message_to_external_api, submit_feedback, increment_count, register, login_view, logout_view, telegrambot, trafick
 
 urlpatterns = [
     path('', index, name='index'),
@@ -10,4 +10,6 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('api/send_message', send_message_to_external_api, name='send_message_to_external_api'),
     path('api/submit_feedback/', submit_feedback, name='submit_feedback'),
+    path('trafick/', trafick, name='trafick'),
+    path('increment_count/', increment_count, name='increment_count'),
 ]

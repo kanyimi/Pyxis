@@ -40,7 +40,17 @@
     color: #fff;
     margin-left: auto;
 }
-
+@keyframes rotate-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 .open-widget-btn {
     position: fixed;
     bottom: 20px;
@@ -63,9 +73,12 @@
     z-index: 1000;
     background-color: white;
     color: #ffffff;
-    /*animation: blink-animation 5s infinite;*/
-    animation-delay: 9s;
-     transition: transform 0.5s ease;
+    /*animation: blink-animation 5s infinite;
+    animation-delay: 9s;*/
+    transition: transform 0.5s ease;
+     animation: rotate-animation 0.5s ease infinite;
+    animation-delay: 5s;
+    animation-duration: 20s;
 }
 @keyframes blink-animation {
     0%, 100% {
@@ -90,6 +103,7 @@
 }
 .open-widget-btn:hover {
     transform: rotate(360deg);
+    animation:none;
 }
 .messages-list {
     list-style: none;

@@ -1,9 +1,11 @@
 import requests
 import json
+
+from django.db.models import Sum
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
-from .models import Feedback, ChatHistory, APICallCount
+from .models import Feedback, ChatHistory, APICallCount, ButtonClick
 from .forms import UserRegistrationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
@@ -29,8 +31,6 @@ def index(request):
         "chat_history": chat_history,
     }
     return render(request, 'chat/index.html', context)
-
-
 
 
 
@@ -194,3 +194,25 @@ def logout_view(request):
 
 def telegrambot(request):
     return render(request, "chat/telegrambot.html")
+
+def trafick(request):
+    apicall_count = APICallCount.objects.aggregate(total_count=Sum('count'))['total_count'] or 0
+
+    # Get the ButtonClick count
+    button_click = ButtonClick.objects.first()  # Assuming you only have one instance
+    button_click_count = button_click.count if button_click else 0
+    context ={
+            "apicall_count": apicall_count,
+            "button_click_count": button_click_count,
+
+    }
+    return render(request, "chat/trafick.html", context)
+
+@csrf_exempt
+def increment_count(request):
+    if request.method == 'POST':
+        button_click, created = ButtonClick.objects.get_or_create(id=1)
+        button_click.count += 1
+        button_click.save()
+        return JsonResponse({'count': button_click.count})
+    return JsonResponse({'error': 'Invalid request'}, status=400)

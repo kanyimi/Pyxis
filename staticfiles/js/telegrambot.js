@@ -9,12 +9,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const openWidgetButton = document.getElementById('open-widget-btn');
     const closeWidgetButton = document.getElementById('close-widget-btn');
     const supportWidget = document.getElementById('support-widget');
+    const incrementCountUrl = openWidgetButton.getAttribute('data-url');
 
     openWidgetButton.addEventListener('click', function() {
 //        supportWidget.style.display = 'flex';
 //        openWidgetButton.style.display = 'none';
 //        sendResizeToParent(440, 468);
           window.open("https://t.me/PyxisK_bot", "_blank");
+                fetch(incrementCountUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Button click count incremented:', data);
+        })
+        .catch(error => {
+            console.error('Error incrementing button click count:', error);
+        });
     });
 
     closeWidgetButton.addEventListener('click', function() {

@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width,
+				initial-scale=1.0">
+	<title>pyxis trafick  count</title>
+	<link rel="stylesheet" href=
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	 <link rel="stylesheet" href="{% static 'css/trafick.css' %}">
+</head>
+
+<body>
+    <div id="cookies-popup" class="collapsible-widget">
+        <img src="https://kpyx.co/static/img/widget.png" style="cursor: pointer;" id="widget-toggle">
+        <div class="count-display" id="count-display" style="display: none;">
+            <h2>Pyxis: {{ apicall_count }}</h2>
+            <p>Redirect To Telegram: {{ button_click_count }}</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to toggle the display of the count-display div
+        document.getElementById('widget-toggle').addEventListener('click', function() {
+            const countDisplay = document.getElementById('count-display');
+            if (countDisplay.style.display === "none") {
+                countDisplay.style.display = "block";
+            } else {
+                countDisplay.style.display = "none";
+            }
+        });
+    </script>
+</body>
+
+
+</html>
