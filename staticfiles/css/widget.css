@@ -28,46 +28,6 @@
 
 }
 
-/* Mobile adjustments */
-/*@media (max-width: 480px) {
-    .chat-container {
-        height: 100%;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        width: 100%;
-        border-radius: 0;
-    }
-
-    .modal-content {
-        width: 90%;
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .chat-container .widget-header {
-        padding: 5px;
-    }
-
-    .input-container {
-        padding: 5px;
-    }
-
-    .messages-list {
-        padding: 5px;
-    }
-
-    .modal-content {
-        padding: 10px;
-    }
-
-    .submit-feedback-btn {
-        width: 40px;
-        height: 40px;
-    }
-}
-*/
 
 
 .widget-header {
@@ -208,9 +168,9 @@
     border-radius: 5px;
     margin-bottom: 5px;
     display: flex;
-    /*align-items: flex-start;*/
+    align-items: flex-start;
     flex-direction: column;
-    text-align: justify;
+    text-align: left;
 }
 
 .user-message {
