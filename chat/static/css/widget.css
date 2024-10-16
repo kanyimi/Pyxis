@@ -28,7 +28,7 @@
 }
 
 /* Mobile adjustments */
-@media (max-width: 480px) {
+/*@media (max-width: 480px) {
     .chat-container {
         height: 100%;
         bottom: 0;
@@ -39,7 +39,7 @@
     }
 
     .modal-content {
-        width: 90%; /* Adjust modal width for mobile */
+        width: 90%;
         max-width: 100%;
     }
 }
@@ -66,6 +66,7 @@
         height: 40px;
     }
 }
+*/
 
 
 .widget-header {
