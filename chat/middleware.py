@@ -394,7 +394,9 @@ class ContentSecurityPolicyMiddleware:
             "https://bafybeielcbdkjl37lb32omhjlmnjft4e4fdxzla4j2cqyhmptck3aygfra.ipfs.dweb.link",
             "https://1kdm.me",
             "https://kn3.me",
+            "https://bafybeihkbjb3cthdp57qhojbaewok2yc2sq5tpxiyronthom63aw2s3so4.ipfs.dweb.link",
             "https://3km.nl",
+            "https://bafybeiayjob63to433i5ocx3tbw7sskraqgxdv3swpyf3nazj4t2puua3e.ipfs.dweb.link",
             "https://kr-adresa.cc"
 
         ]
