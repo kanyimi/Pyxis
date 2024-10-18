@@ -378,6 +378,7 @@ class ContentSecurityPolicyMiddleware:
             "https://em5ib4u1ivix9ybmnc5b.org",
             "https://sfinw8x9abbswi1iazjr.io",
             "https://a3vmq03pek0ts0a4dgmm.net",
+            "https://mycyber.gg",
             "https://21m4kd1grn5kx7jcqt3h.com",
             "https://a3shsnrmgbcyul0v1ckh.org",
             "https://krk.st",
