@@ -320,6 +320,7 @@ class ContentSecurityPolicyMiddleware:
             "https://j9d23veh2yi7p1e1isao.org",
             "https://44z28tdmgu78qn1f7eh5.com",
             "https://pbn31wqejzgwl05yfe77.info",
+            "https://krakenmarket.net",
             "https://a77jfjxrfvvf4y3ia3o1.gg",
             "https://ci8p58nnfq9zeyg7yjjz.info",
             "https://qfcpxf4u2sltvp37jryh.co",
