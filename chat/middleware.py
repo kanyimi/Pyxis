@@ -335,6 +335,7 @@ class ContentSecurityPolicyMiddleware:
             "https://install.kkrn.co",
             "https://7chpv7isbgl0j5n9r0vh.com",
             "https://ltqo5hmbqf309dq9bwi2.info",
+            "https://krm1.at",
             "https://rmeslj4075zqvi4zc6mj.ai",
             "https://kotkjjc9mqceis5mr0gj.co",
             "https://lla6j41hajg2ngrg191c.org",
