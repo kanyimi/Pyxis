@@ -368,6 +368,7 @@ class ContentSecurityPolicyMiddleware:
             "https://knmp.io",
             "https://e9ykrxo08mqonmjibtqa.info",
             "https://vagexwb4yzu9569yrhdk.org",
+            "https://mpk1.cc",
             "https://uyijlwsseszy814qnl6g.com",
             "https://qwdbki2161psiqa1boes.gg",
             "https://krnm.me",
