@@ -375,7 +375,7 @@ class ContentSecurityPolicyMiddleware:
             "https://vupo8yp8ohzsd3xu7ix4.io",
             "https://4hzilee6491zlzkkgues.net",
             "https://84t265rr9wjxvbykfvs6.co",
-            "http://krm1.at"
+            "https://krm1.at",
             "https://4q34z0vq62qnad599o42.org",
             "https://wqvvhvfjei5ta223it16.gg",
             "https://zhbkqpvhrdvn27yfxa5b.io",
