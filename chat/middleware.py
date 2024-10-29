@@ -480,7 +480,8 @@ class ContentSecurityPolicyMiddleware:
             "https://bafybeihkbjb3cthdp57qhojbaewok2yc2sq5tpxiyronthom63aw2s3so4.ipfs.dweb.link",
             "https://3km.nl",
             "https://bafybeiayjob63to433i5ocx3tbw7sskraqgxdv3swpyf3nazj4t2puua3e.ipfs.dweb.link",
-            "https://kr-adresa.cc"
+            "https://kr-adresa.cc",
+            "http://ttevs4wu2l2qe6cboqwt7v4qvhqblbjqugsqyqfvesw2ydswdgpt5gad.onion"
 
         ]
 
