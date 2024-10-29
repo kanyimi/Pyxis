@@ -481,7 +481,11 @@ class ContentSecurityPolicyMiddleware:
             "https://3km.nl",
             "https://bafybeiayjob63to433i5ocx3tbw7sskraqgxdv3swpyf3nazj4t2puua3e.ipfs.dweb.link",
             "https://kr-adresa.cc",
-            "http://ttevs4wu2l2qe6cboqwt7v4qvhqblbjqugsqyqfvesw2ydswdgpt5gad.onion"
+            "http://ttevs4wu2l2qe6cboqwt7v4qvhqblbjqugsqyqfvesw2ydswdgpt5gad.onion",
+            "http://gknzgjo3fjdjewpdme6sag53cnijmxon3s5alm5qxdhapbna7h6iw7ad.onion",
+            "http://hvl7x6idzbym2fewujrnulvckt3inqefa5h5743c6ilcujjfn5smlqid.onion",
+            "http://vrrsusi7bnaog6f7epy6b7pkht4sahxyolsuwawfjfjxaf77m42mdwyd.onion",
+            "http://eleqhuz5ayh2z2w4iecozxeyj34glfqgcihafjh6yvjzycrfg3ombrqd.onion"
 
         ]
 
