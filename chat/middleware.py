@@ -394,6 +394,7 @@ class ContentSecurityPolicyMiddleware:
             "https://cybertown.gg",
             "https://pveuwa314n76k81fxu94.net",
             "https://3lsa7is0hinkeaw3j595.info",
+            "https://ddna.art",
             "https://9mx706lya05x0m3kifh0.org",
             "https://gj5wdx2n6fdqr0mg00tp.io",
             "https://krkmp.top",
