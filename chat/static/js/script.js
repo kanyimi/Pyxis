@@ -83,8 +83,9 @@ function displayWelcomeMessage() {
     botMessage.appendChild(botMessageContent);
     welcomeMessageDiv.appendChild(botMessage);
 
-    //const welcomeText = "Здравствуйте! Я Pyxis - искусственный интеллект, созданный командой KRAKEN для оперативной помощи нашим пользователям, покупателям и продавцам. Обращаю ваше внимание, что сейчас я нахожусь на стадии бета-тестирования, обучение - долгий процесс, но с вашей помощью он может пройти быстрее!";
-    const welcomeText = " Привет! Я Pyxis - искусственный интеллект, созданный командой KRAKEN для оперативной помощи нашим пользователям, покупателям и продавцам. ВАЖНО: в данный момент я нахожусь на технических работах, прошу тебя подождать перед использованием, в скором времени я вернусь с новыми знаниями и способностями!"
+    const welcomeText = "Здравствуйте! Я Pyxis - искусственный интеллект, созданный командой KRAKEN для оперативной помощи нашим пользователям, покупателям и продавцам. Обращаю ваше внимание, что сейчас я нахожусь на стадии бета-тестирования, обучение - долгий процесс, но с вашей помощью он может пройти быстрее!";
+
+    //const welcomeText = " Привет! Я Pyxis - искусственный интеллект, созданный командой KRAKEN для оперативной помощи нашим пользователям, покупателям и продавцам. ВАЖНО: в данный момент я нахожусь на технических работах, прошу тебя подождать перед использованием, в скором времени я вернусь с новыми знаниями и способностями!"
 
     typeMessage(botMessageContent, welcomeText);
 }
@@ -178,7 +179,7 @@ async function sendMessage() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': '50jsh291g-636f-4891-b1ed-706e9ad7970f_721bap7nan'
+                'Authorization': '721bap7nan-4891-b1ed-706e9ad7970f_50jsh291g-636f'
             },
             body: JSON.stringify({
                 content: formattedMessage,
@@ -267,7 +268,7 @@ function submitFeedback(botMessage, feedback, type) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': '50jsh291g-636f-4891-b1ed-706e9ad7970f_721bap7nan'
+            'Authorization': '721bap7nan-4891-b1ed-706e9ad7970f_50jsh291g-636f'
         },
         body: JSON.stringify({
             bot_message: botMessage,

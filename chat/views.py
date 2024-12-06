@@ -100,19 +100,20 @@ def send_message_to_external_api(request):
             # Prepare the request payload
             payload = {
                 'content': history_text,
-                'message_id': data.get('message_id', '')
+                'message_id': data.get('message_id', 'unique_message_270')
             }
 
             # Send the request to the external API
             response = requests.post(
-                'https://213.199.32.2',
+                'https://38.180.199.37:8443/omnia',
                 headers={
                     'Content-Type': 'application/json',
-                    'Authorization': '50jsh291g-636f-4891-b1ed-706e9ad7970f_721bap7nan'
+                    'Authorization': '721bap7nan-4891-b1ed-706e9ad7970f_50jsh291g-636f'
                 },
                 json=payload,
-                cert=('C:/Users/User/OneDrive/Desktop/ca-certificates/client.crt',
-                      'C:/Users/User/OneDrive/Desktop/ca-certificates/client.key'),
+                cert=('C:/Users/User/OneDrive/Desktop/instruct/client_cert.crt',
+                      'C:/Users/User/OneDrive/Desktop/instruct/client_key.key'),
+
                 verify=False,
                 timeout=180
             )
