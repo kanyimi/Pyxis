@@ -10,13 +10,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
 
-DEBUG = False
+DEBUG = True
 
 AUTH_USER_MODEL = 'chat.account'
 
 
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '5.255.116.253,localhost,kpyx.co,www.kpyx.co,kpyx.io,www.kpyx.io,www.krmp.io,krmp.io,2krk.site').split(',')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '198.177.124.125,localhost,kpyx.co,www.kpyx.co,kpyx.io,www.kpyx.io,www.krmp.io,krmp.io,2krk.site').split(',')
 
 # Добавьте CSRF_TRUSTED_ORIGINS
 CSRF_TRUSTED_ORIGINS = [
@@ -185,41 +185,41 @@ MESSAGE_TAGS = {
 
 import os
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',  # You can set this to 'INFO' for less verbosity
-            'class': 'logging.StreamHandler',
-        },
-        'file': {
-            'level': 'DEBUG',  # Logs from DEBUG level and above
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'ERROR',  # Only log errors related to requests
-            'propagate': False,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',  # You can set this to 'INFO' for less verbosity
+#             'class': 'logging.StreamHandler',
+#         },
+#         'file': {
+#             'level': 'DEBUG',  # Logs from DEBUG level and above
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(BASE_DIR, 'logs/django.log'),
+#             'formatter': 'verbose',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console', 'file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#         'django.request': {
+#             'handlers': ['file'],
+#             'level': 'ERROR',  # Only log errors related to requests
+#             'propagate': False,
+#         },
+#     },
+# }
