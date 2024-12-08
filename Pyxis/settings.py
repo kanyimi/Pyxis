@@ -10,13 +10,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
 
-DEBUG = True
+DEBUG = False
 
 AUTH_USER_MODEL = 'chat.account'
 
 
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '198.177.124.125,localhost,kpyx.co,www.kpyx.co,kpyx.io,www.kpyx.io,www.krmp.io,krmp.io,2krk.site').split(',')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '5.255.116.253,localhost,kpyx.co,www.kpyx.co,kpyx.io,www.kpyx.io,www.krmp.io,krmp.io,2krk.site').split(',')
 
 # Добавьте CSRF_TRUSTED_ORIGINS
 CSRF_TRUSTED_ORIGINS = [
