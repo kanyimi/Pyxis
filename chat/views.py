@@ -102,7 +102,9 @@ def send_message_to_external_api(request):
                 'content': history_text,
                 'message_id': data.get('message_id', 'unique_message_270')
             }
-
+            CLIENT_KEY = './client_key.key'
+            CLIENT_CERT = './client_cert.crt'
+            CA_CERT = './ca.crt'
             # Send the request to the external API
             response = requests.post(
                 'https://38.180.199.37:8443/omnia',
@@ -111,8 +113,8 @@ def send_message_to_external_api(request):
                     'Authorization': '721bap7nan-4891-b1ed-706e9ad7970f_50jsh291g-636f'
                 },
                 json=payload,
-                cert=('C:/Users/User/OneDrive/Desktop/instruct/client_cert.crt',
-                      'C:/Users/User/OneDrive/Desktop/instruct/client_key.key'),
+                # cert=('/root/ubuntu/ca-certificates/client_cert.crt', '/root/ubuntu/ca-certificates/client_key.key'),
+                cert=(CLIENT_CERT, CLIENT_KEY),
 
                 verify=False,
                 timeout=180
