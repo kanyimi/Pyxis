@@ -102,9 +102,10 @@ def send_message_to_external_api(request):
                 'content': history_text,
                 'message_id': data.get('message_id', 'unique_message_270')
             }
+            # Путь к клиентскому сертификату и ключу
             CLIENT_KEY = './client_key.key'
             CLIENT_CERT = './client_cert.crt'
-            CA_CERT = './ca.crt'
+            CA_CERT = './ca.crt'  # Путь к CA сертификату (если необходимо)
             # Send the request to the external API
             response = requests.post(
                 'https://38.180.199.37:8443/omnia',
@@ -113,28 +114,34 @@ def send_message_to_external_api(request):
                     'Authorization': '721bap7nan-4891-b1ed-706e9ad7970f_50jsh291g-636f'
                 },
                 json=payload,
-                # cert=('/root/ubuntu/ca-certificates/client_cert.crt', '/root/ubuntu/ca-certificates/client_key.key'),
                 cert=(CLIENT_CERT, CLIENT_KEY),
 
                 verify=False,
                 timeout=180
             )
-
             bot_response = response.json()
+            print("Response from external API:", bot_response)
 
             if 'response' in bot_response:
-                bot_response['response'] = bot_response['response'].replace('\\n', '\n').replace('\\\n', '\n').replace('\\\\n', '\n')
+                bot_response['response'] = bot_response['response'].replace('\\n', '\n').replace('\\\n', '\n').replace(
+                    '\\\\n', '\n')
 
-                # Create a new chat history entry for the bot response
+                # Save the bot's response in chat history
                 ChatHistory.objects.create(session_key=identifier, message=bot_response['response'], sender='bot')
-
+            print(f"Статус-код: {response.status_code}")
             return JsonResponse(bot_response, status=response.status_code)
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as e:
+            print(f"JSON Decode Error: {e}")
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except requests.RequestException as e:
+            print(f"Request Error: {e}")
             return JsonResponse({'error': f"Request failed: {str(e)}"}, status=500)
-    else:
-        return JsonResponse({'error': 'This method is not allowed'}, status=405)
+        except Exception as e:
+            print(f"Unexpected Error: {e}")
+            return JsonResponse({'error': f"An unexpected error occurred: {str(e)}"}, status=500)
+        else:
+            print("Invalid HTTP method:", request.method)
+            return JsonResponse({'error': 'This method is not allowed'}, status=405)
 
 
 def home(request):
