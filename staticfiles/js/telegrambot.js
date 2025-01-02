@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //        supportWidget.style.display = 'flex';
 //        openWidgetButton.style.display = 'none';
 //        sendResizeToParent(440, 468);
-          window.open("https://t.me/PyxisK_bot", "_blank");
+          window.open("https://t.me/Pyxis_K_bot", "_blank");
                 fetch(incrementCountUrl, {
             method: 'POST',
             headers: {
