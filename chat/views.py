@@ -103,9 +103,9 @@ def send_message_to_external_api(request):
                 'message_id': data.get('message_id', 'unique_message_270')
             }
             # Путь к клиентскому сертификату и ключу
-            CLIENT_KEY = './client_key.key'
-            CLIENT_CERT = './client_cert.crt'
-            CA_CERT = './ca.crt'  # Путь к CA сертификату (если необходимо)
+            CLIENT_KEY = '/etc/ssl/certs/client_key.key'
+            CLIENT_CERT = '/etc/ssl/certs/client_cert.crt'
+            CA_CERT = '/etc/ssl/certs/ca.crt'  # Путь к CA сертификату (если необходимо)
             # Send the request to the external API
             response = requests.post(
                 'https://38.180.199.37:8443/omnia',
@@ -119,17 +119,29 @@ def send_message_to_external_api(request):
                 verify=False,
                 timeout=180
             )
-            bot_response = response.json()
-            print("Response from external API:", bot_response)
+            print(f"Статус-код: {response.status_code}")
 
-            if 'response' in bot_response:
-                bot_response['response'] = bot_response['response'].replace('\\n', '\n').replace('\\\n', '\n').replace(
-                    '\\\\n', '\n')
+            if response.status_code == 500:
+                bot_response = {
+                    'response': "Упс. Кажется на сервере произошла ошибка. Повторите запрос через несколько минут"
+                }
+                print("Response from external API (500 error):", bot_response)
+            else:
+                bot_response = response.json()
+                print("Response from external API:", bot_response)
+
+                if 'response' in bot_response:
+                    bot_response['response'] = bot_response['response'].replace('\\n', '\n').replace('\\\n',
+                                                                                                     '\n').replace(
+                        '\\\\n', '\n')
+
+                    ChatHistory.objects.create(session_key=identifier, message=bot_response['response'], sender='bot')
 
                 # Save the bot's response in chat history
                 ChatHistory.objects.create(session_key=identifier, message=bot_response['response'], sender='bot')
             print(f"Статус-код: {response.status_code}")
             return JsonResponse(bot_response, status=response.status_code)
+
         except json.JSONDecodeError as e:
             print(f"JSON Decode Error: {e}")
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
