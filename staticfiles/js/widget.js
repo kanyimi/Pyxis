@@ -82,7 +82,7 @@ function displayWelcomeMessage() {
     botMessageContent.className = 'message-content';
 
     const botIcon = document.createElement('img');
-    botIcon.src = 'https://kpyx.co/static/img/chaticon/pyxw.png';
+    botIcon.src = 'https://kpyx.io/static/img/chaticon/pyxw.png';
     botIcon.alt = 'Pyxis';
     botIcon.className = 'message-icon';
 
@@ -205,7 +205,7 @@ async function sendWidgetMessage() {
     userMessageContent.className = 'message-content';
 
     const userIcon = document.createElement('img');
-    userIcon.src = 'https://kpyx.co/static/img/chaticon/usrw.png';
+    userIcon.src = 'https://kpyx.io/static/img/chaticon/usrw.png';
     userIcon.alt = 'User';
     userIcon.className = 'message-icon';
 
@@ -270,7 +270,7 @@ async function sendWidgetMessage() {
             botMessageContent.className = 'message-content';
 
             const botIcon = document.createElement('img');
-            botIcon.src = 'https://kpyx.co/static/img/chaticon/pyxw.png';
+            botIcon.src = 'https://kpyx.io/static/img/chaticon/pyxw.png';
             botIcon.alt = 'Pyxis';
             botIcon.className = 'message-icon';
 

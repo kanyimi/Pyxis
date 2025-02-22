@@ -67,7 +67,7 @@ function displayWelcomeMessage() {
     botMessageHeader.className = 'message-header';
 
     const botIcon = document.createElement('img');
-    botIcon.src = 'https://kpyx.co/static/img/chaticon/pyxw.png';
+    botIcon.src = 'https://kpyx.io/static/img/chaticon/pyxw.png';
     botIcon.alt = 'Pyxis';
 
     const botMessageTitle = document.createElement('span');
@@ -145,7 +145,7 @@ async function sendWidgetMessage() {
     userMessageHeader.className = 'message-header';
 
     const userIcon = document.createElement('img');
-    userIcon.src = 'https://kpyx.co/static/img/chaticon/usrw.png';
+    userIcon.src = 'https://kpyx.io/static/img/chaticon/usrw.png';
     userIcon.alt = 'User';
 
     const userMessageTitle = document.createElement('span');
@@ -170,7 +170,7 @@ async function sendWidgetMessage() {
     messageList.scrollTop = messageList.scrollHeight;
 
     try {
-        const response = await fetch('https://kpyx.co/api/send_message', {
+        const response = await fetch('https://kpyx.io/api/send_message', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ async function sendWidgetMessage() {
             botMessageHeader.className = 'message-header';
 
             const botIcon = document.createElement('img');
-            botIcon.src = 'https://kpyx.co/static/img/chaticon/pyxw.png';
+            botIcon.src = 'https://kpyx.io/static/img/chaticon/pyxw.png';
             botIcon.alt = 'Pyxis';
 
             const botMessageTitle = document.createElement('span');
@@ -253,7 +253,7 @@ async function sendWidgetMessage() {
 }
 
 function submitFeedback(botMessage, feedback, type) {
-    fetch('https://kpyx.co/api/submit_feedback', {
+    fetch('https://kpyx.io/api/submit_feedback', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -276,7 +276,7 @@ function submitFeedback(botMessage, feedback, type) {
 
 async function submitFeedback(botMessageContent, feedbackContent, feedbackType) {
     try {
-        const response = await fetch('https://kpyx.co/api/submit_feedback/', {
+        const response = await fetch('https://kpyx.io/api/submit_feedback/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
