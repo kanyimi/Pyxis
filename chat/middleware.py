@@ -400,13 +400,14 @@ class ContentSecurityPolicyMiddleware:
             "https://krkmp.top",
             "https://161gs0lgeixtxlamgiwg.ai",
             "https://psbad2rrk6wf6l8ib01p.org",
+            "https://DDNA.INFO",
             "https://89iqoqzauh6eg348zlqd.info",
             "https://3km.ac",
             "https://3km.so",
             "https://3km.gg",
             "https://m27crag4rtdsfrkp3y1p.ai",
             "https://5yiz3z2g8o3yvdq4373j.info",
-            "https://ddna.live",
+
             "https://nf8nfnzhd5fha25sh14g.co",
             "https://rszara2zll18pj8grkin.gg",
             "https://kn1.ac",
@@ -461,6 +462,7 @@ class ContentSecurityPolicyMiddleware:
             "https://bhm20ep3w3d3f10vjmok.io",
             "https://3km.me",
             "https://t80c3vdcb3s8v2hbh8l5.com",
+            "https://DDNA.LIVE",
             "https://mao7ryq0pzh5wyqwiaa5.gg",
             "https://krnm.pro",
             "https://3dt5xqq8be4zznjw9d7v.org",
@@ -485,8 +487,8 @@ class ContentSecurityPolicyMiddleware:
             "http://ttevs4wu2l2qe6cboqwt7v4qvhqblbjqugsqyqfvesw2ydswdgpt5gad.onion",
             "http://gknzgjo3fjdjewpdme6sag53cnijmxon3s5alm5qxdhapbna7h6iw7ad.onion",
             "http://hvl7x6idzbym2fewujrnulvckt3inqefa5h5743c6ilcujjfn5smlqid.onion",
-            "https://ddna.biz",
             "http://vrrsusi7bnaog6f7epy6b7pkht4sahxyolsuwawfjfjxaf77m42mdwyd.onion",
+            "https://ddna.biz",
             "http://eleqhuz5ayh2z2w4iecozxeyj34glfqgcihafjh6yvjzycrfg3ombrqd.onion"
 
         ]
