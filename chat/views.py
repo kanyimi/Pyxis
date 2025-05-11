@@ -12,7 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.utils import timezone
 
-
+import uuid
 def index(request):
     if not request.session.session_key:
         request.session.create()
@@ -31,6 +31,7 @@ def index(request):
         "chat_history": chat_history,
     }
     return render(request, 'chat/index.html', context)
+
 
 
 
@@ -63,50 +64,59 @@ def send_message_to_external_api(request):
                     identifier = request.session.session_key
                 sender = 'user'
 
-            # Retrieve chat history for the identifier
-            history = ChatHistory.objects.filter(session_key=identifier).order_by('created_at')
-            history_text = ""
+            # Retrieve and optionally trim chat history
+            history = list(ChatHistory.objects.filter(session_key=identifier).order_by('created_at'))
+
+            # Remove the last bot message if it's the most recent
+            if history and history[-1].sender == 'bot':
+                print("Removing last bot response from history to avoid duplication")
+                history = history[:-1]
 
             # Format the chat history
+            history_text = ""
             for entry in history:
                 if entry.sender == 'user':
                     history_text += f"\n\nUSER: {entry.message} "
                 elif entry.sender == 'bot':
                     history_text += f"\n\nASSISTANT: {entry.message} "
 
-            # Format the current user message
-            formatted_content = data['content'].replace('\\n', '\n').replace('\\\n', '\n').replace('\\\\n', '\n')
-            history_text += f"\n\nUSER: {formatted_content}"
+            # Format the current user message and append it
+            formatted_question = data['content'].replace('\\n', '\n').replace('\\\n', '\n').replace('\\\\n', '\n')
+            history_text += f"\n\nUSER: {formatted_question}"
             print("chat history: ", history_text)
             print("length chat history: ", len(history_text))
 
+            # Truncate if too long
             if len(history_text) > 5000:
                 history_text = history_text[-5000:]
 
-            # Находим индекс первого сообщения пользователя
+            # Keep history only from the first user message onward
             first_user_message_index = history_text.find("USER:")
-
-            # Если сообщение пользователя найдено, смещаем историю
             if first_user_message_index != -1:
-                # Обрезаем историю до первого сообщения пользователя
                 history_text = history_text[first_user_message_index:]
 
-            print("truncated chat history: ", history_text)
             print("length truncated chat history: ", len(history_text))
+            print("truncated chat history: ", history_text)
 
-            # Create a new chat history entry for the user message
-            ChatHistory.objects.create(session_key=identifier, message=formatted_content, sender = sender)
+            # Save current user message
+            ChatHistory.objects.create(session_key=identifier, message=formatted_question, sender=sender)
 
-            # Prepare the request payload
+            message_id = str(uuid.uuid4())
             payload = {
+                "message_id": message_id,
                 'content': history_text,
-                'message_id': data.get('message_id', 'unique_message_270')
             }
-            # Путь к клиентскому сертификату и ключу
+
+            # Client certificate details
+            # CLIENT_KEY = 'C:/Users/User/OneDrive/Desktop/instruct/client_key.key'
+            # CLIENT_CERT = 'C:/Users/User/OneDrive/Desktop/instruct/client_cert.crt'
+            # CA_CERT = 'C:/Users/User/OneDrive/Desktop/instruct/ca.crt'
+
             CLIENT_KEY = '/etc/ssl/certs/client_key.key'
             CLIENT_CERT = '/etc/ssl/certs/client_cert.crt'
-            CA_CERT = '/etc/ssl/certs/ca.crt'  # Путь к CA сертификату (если необходимо)
-            # Send the request to the external API
+            CA_CERT = '/etc/ssl/certs/ca.crt'
+
+            # Send request to external API
             response = requests.post(
                 'https://38.180.199.37:8443/omnia',
                 headers={
@@ -115,11 +125,12 @@ def send_message_to_external_api(request):
                 },
                 json=payload,
                 cert=(CLIENT_CERT, CLIENT_KEY),
-
                 verify=False,
                 timeout=180
             )
+
             print(f"Статус-код: {response.status_code}")
+            # print("Raw response text from external API:", response.text)
 
             if response.status_code == 500:
                 bot_response = {
@@ -131,15 +142,9 @@ def send_message_to_external_api(request):
                 print("Response from external API:", bot_response)
 
                 if 'response' in bot_response:
-                    bot_response['response'] = bot_response['response'].replace('\\n', '\n').replace('\\\n',
-                                                                                                     '\n').replace(
-                        '\\\\n', '\n')
-
+                    bot_response['response'] = bot_response['response'].replace('\\n', '\n').replace('\\\n', '\n').replace('\\\\n', '\n')
                     ChatHistory.objects.create(session_key=identifier, message=bot_response['response'], sender='bot')
 
-                # Save the bot's response in chat history
-                ChatHistory.objects.create(session_key=identifier, message=bot_response['response'], sender='bot')
-            print(f"Статус-код: {response.status_code}")
             return JsonResponse(bot_response, status=response.status_code)
 
         except json.JSONDecodeError as e:
@@ -151,10 +156,9 @@ def send_message_to_external_api(request):
         except Exception as e:
             print(f"Unexpected Error: {e}")
             return JsonResponse({'error': f"An unexpected error occurred: {str(e)}"}, status=500)
-        else:
-            print("Invalid HTTP method:", request.method)
-            return JsonResponse({'error': 'This method is not allowed'}, status=405)
-
+    else:
+        print("Invalid HTTP method:", request.method)
+        return JsonResponse({'error': 'This method is not allowed'}, status=405)
 
 def home(request):
     return render(request, "chat/home.html")
