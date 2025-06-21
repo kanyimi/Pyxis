@@ -489,7 +489,11 @@ class ContentSecurityPolicyMiddleware:
             "http://hvl7x6idzbym2fewujrnulvckt3inqefa5h5743c6ilcujjfn5smlqid.onion",
             "http://vrrsusi7bnaog6f7epy6b7pkht4sahxyolsuwawfjfjxaf77m42mdwyd.onion",
             "https://ddna.biz",
-            "http://eleqhuz5ayh2z2w4iecozxeyj34glfqgcihafjh6yvjzycrfg3ombrqd.onion"
+            "http://eleqhuz5ayh2z2w4iecozxeyj34glfqgcihafjh6yvjzycrfg3ombrqd.onion",
+            "https://ddna.events",
+            "https://ddna.pw",
+            "https://ddna.pro",
+            "https://ddna.site"
 
         ]
 
