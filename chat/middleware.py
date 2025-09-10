@@ -493,7 +493,9 @@ class ContentSecurityPolicyMiddleware:
             "https://ddna.events",
             "https://ddna.pw",
             "https://ddna.pro",
-            "https://ddna.site"
+            "https://ddna.site",
+            "https://ddna1.info",
+            "https://ddna1.pro"
 
         ]
 
