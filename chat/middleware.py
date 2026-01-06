@@ -501,7 +501,11 @@ class ContentSecurityPolicyMiddleware:
             "https://ddna3.pro",
             "https://ddna3.info",
             "https://ddna4.pro",
-            "https://ddna4.info"
+            "https://ddna4.info",
+            "https://ddna5.pro",
+            "https://ddna5.info",
+            "https://ddna6.pro",
+            "https://ddna6.info"
 
         ]
 
