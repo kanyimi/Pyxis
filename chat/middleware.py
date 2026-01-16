@@ -496,7 +496,7 @@ class ContentSecurityPolicyMiddleware:
             "https://ddna.site",
             "https://ddna1.info",
             "https://ddna1.pro",
-            "https://ddna2.info",
+            "https://ddna6.pro",
             "https://ddna2.pro",
             "https://ddna3.pro",
             "https://ddna3.info",
