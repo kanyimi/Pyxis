@@ -505,7 +505,18 @@ class ContentSecurityPolicyMiddleware:
             "https://ddna5.pro",
             "https://ddna5.info",
             "https://ddna6.pro",
-            "https://ddna6.info"
+            "https://ddna6.info",
+            "https://ddna1.live",
+            "https://ddna2.live",
+            "https://ddna3.live",
+            "https://ddna4.live",
+            "https://ddna5.live",
+            "https://ddna6.live",
+            "https://ddna7.live",
+            "https://ddna8.live",
+            "https://ddna9.live",
+            "https://ddna10.live"
+
 
         ]
 
