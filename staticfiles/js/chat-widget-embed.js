@@ -16,14 +16,14 @@
 
 
     // Set the iframe source to the provided URL
-    iframe.src = 'https://kpyx.io/home';
+    iframe.src = 'https://kpyx.to/home';
 
     // Append the iframe to the body of the host page
     document.body.appendChild(iframe);
     // Listen for messages from the iframe
     window.addEventListener('message', function(event) {
         // Optionally, check the origin for security reasons
-        if (event.origin === 'https://kpyx.io') {
+        if (event.origin === 'https://kpyx.to') {
             // Check for the resize action and adjust iframe size
             if (event.data.action === 'resize') {
                 iframe.style.width = event.data.width + 'px';
