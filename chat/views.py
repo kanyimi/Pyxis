@@ -11,7 +11,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.utils import timezone
-
+from django.conf import settings
 import uuid
 def index(request):
     if not request.session.session_key:
@@ -108,13 +108,9 @@ def send_message_to_external_api(request):
             }
 
             # Client certificate details
-            # CLIENT_KEY = 'C:/Users/User/OneDrive/Desktop/instruct/client_key.key'
-            # CLIENT_CERT = 'C:/Users/User/OneDrive/Desktop/instruct/client_cert.crt'
-            # CA_CERT = 'C:/Users/User/OneDrive/Desktop/instruct/ca.crt'
-
-            CLIENT_KEY = '/etc/ssl/certs/client_key.key'
-            CLIENT_CERT = '/etc/ssl/certs/client_cert.crt'
-            CA_CERT = '/etc/ssl/certs/ca.crt'
+            CLIENT_KEY = settings.CLIENT_KEY
+            CLIENT_CERT = settings.CLIENT_CERT
+            CA_CERT = settings.CA_CERT
 
             # Send request to external API
             response = requests.post(
