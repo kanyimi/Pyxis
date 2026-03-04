@@ -515,7 +515,17 @@ class ContentSecurityPolicyMiddleware:
             "https://ddna7.live",
             "https://ddna8.live",
             "https://ddna9.live",
-            "https://ddna10.live"
+            "https://ddna11.live",
+            "https://ddna12.live",
+            "https://ddna13.live",
+            "https://ddna14.live",
+            "https://ddna14.live",
+            "https://ddna15.live",
+            "https://ddna16.live",
+            "https://ddna17.live",
+            "https://ddna18.live",
+            "https://ddna19.live",
+            "https://ddna20.live",
 
 
         ]
