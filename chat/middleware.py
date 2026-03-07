@@ -526,6 +526,27 @@ class ContentSecurityPolicyMiddleware:
             "https://ddna18.live",
             "https://ddna19.live",
             "https://ddna20.live",
+            "https://ddna1.store",
+            "https://ddna2.store",
+            "https://ddna3.store",
+            "https://ddna4.store",
+            "https://ddna5.store",
+            "https://ddna6.store",
+            "https://ddna7.store",
+            "https://ddna8.store",
+            "https://ddna9.store",
+            "https://ddna10.store",
+            "https://ddna11.store",
+            "https://ddna12.store",
+            "https://ddna13.store",
+            "https://ddna14.store",
+            "https://ddna15.store",
+            "https://ddna16.store",
+            "https://ddna17.store",
+            "https://ddna18.store",
+            "https://ddna19.store",
+            "https://ddna20.store",
+
 
 
         ]
