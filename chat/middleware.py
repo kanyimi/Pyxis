@@ -546,6 +546,11 @@ class ContentSecurityPolicyMiddleware:
             "https://ddna18.store",
             "https://ddna19.store",
             "https://ddna20.store",
+            "http://jfwhhvbe3non22if4rj5khpfoctaxcv6ytqrutp7mclltnmyiup3ilyd.onion",
+            "http://akqn65bndonga6wjovc3l6h3eacafzyc2fqdltbkdt64onhndskosjqd.onion",
+            "http://h7uhy35hjh2n5jmhxxw2br2fekaai5day52ixby35paecaopea36g7qd.onion",
+            "http://unolmf5wtf3ojf2jgbb6suk2nlmzpgvpx3k7wy766mjaxm6juhmnexyd.onion",
+            "http://ln4rdzhqwnbyk7u6mexenkejiqld2ijwsdnq7hrqjanq6gdhrpswrqyd.onion"
 
 
 
