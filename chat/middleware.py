@@ -552,7 +552,10 @@ class ContentSecurityPolicyMiddleware:
             "http://h7uhy35hjh2n5jmhxxw2br2fekaai5day52ixby35paecaopea36g7qd.onion",
             "http://unolmf5wtf3ojf2jgbb6suk2nlmzpgvpx3k7wy766mjaxm6juhmnexyd.onion",
             "https://ddna20.site",
-            "http://ln4rdzhqwnbyk7u6mexenkejiqld2ijwsdnq7hrqjanq6gdhrpswrqyd.onion"
+            "http://ln4rdzhqwnbyk7u6mexenkejiqld2ijwsdnq7hrqjanq6gdhrpswrqyd.onion",
+            "https://ddna1.org",
+            "https://ddna10.org",
+
 
 
 
