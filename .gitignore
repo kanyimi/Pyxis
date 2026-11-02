@@ -18,3 +18,4 @@ commans.md
 *.crt
 *.pem
 /etc/ssl/certs/newkpyx/
+/ansible-pyxis/*

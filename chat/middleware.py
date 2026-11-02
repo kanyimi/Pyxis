@@ -582,6 +582,16 @@ class ContentSecurityPolicyMiddleware:
             "https://ddna8.org",
             "https://ddna9.org",
             "https://ddna10.org",
+            "https://ddna1.xyz",
+            "https://ddna2.xyz",
+            "https://ddna3.xyz",
+            "https://ddna4.xyz",
+            "https://ddna5.xyz",
+            "https://ddna6.xyz",
+            "https://ddna7.xyz",
+            "https://ddna8.xyz",
+            "https://ddna9.xyz",
+            "https://ddna10.xyz",
 
 
 
