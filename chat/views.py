@@ -147,6 +147,8 @@ def send_message_to_external_api(request):
             print(f"JSON Decode Error: {e}")
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except requests.RequestException as e:
+            import traceback
+            traceback.print_exc()
             print(f"Request Error: {e}")
             return JsonResponse({'error': f"Request failed: {str(e)}"}, status=500)
         except Exception as e:
